@@ -1,6 +1,7 @@
 import './styles';
 
 export * from './components/catalog';
+export { useCatalogLabels } from './components/strings';
 export * from './components/DietaryTags/DietaryTags';
 export * from './components/DishCard/DishCard';
 export * from './components/FoodCover/FoodCover';

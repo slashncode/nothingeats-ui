@@ -121,3 +121,13 @@ export function useStrings() {
         },
     };
 }
+
+/** Labels of catalog values (cuisines, diet tags, allergens) in the current locale, for apps. */
+export function useCatalogLabels() {
+    const strings = useStrings();
+    return {
+        cuisine: (slug: string) => strings.label('cuisine', slug),
+        dietary: (tag: string) => strings.label('dietary', tag),
+        allergen: (allergen: string) => strings.label('allergen', allergen),
+    };
+}
