@@ -1,0 +1,83 @@
+// NothingEats overrides of soren-ui's tokens (src/soren/styles/globals.scss), loaded after them.
+// Warm "paper and ketchup" palette; every text pair meets WCAG AA (4.5:1) in both modes.
+// Tokens prefixed --ne- are NothingEats additions used by the domain components.
+
+:root {
+    --background: oklch(98.6% 0.006 85deg);
+    --foreground: oklch(21% 0.02 45deg);
+    --card: oklch(100% 0 0deg);
+    --card-foreground: oklch(21% 0.02 45deg);
+    --popover: oklch(100% 0 0deg);
+    --popover-foreground: oklch(21% 0.02 45deg);
+    --primary: oklch(56% 0.2 32deg);
+    --primary-foreground: oklch(99% 0.005 85deg);
+    --secondary: oklch(95% 0.025 75deg);
+    --secondary-foreground: oklch(28% 0.04 50deg);
+    --muted: oklch(95.5% 0.008 80deg);
+    --muted-foreground: oklch(48% 0.02 55deg);
+    --accent: oklch(94% 0.05 160deg);
+    --accent-foreground: oklch(32% 0.07 160deg);
+    --border: oklch(90% 0.012 75deg);
+    --input: oklch(88% 0.014 75deg);
+    --ring: oklch(56% 0.2 32deg);
+    --sidebar: var(--card);
+    --sidebar-foreground: var(--foreground);
+    --sidebar-primary: var(--primary);
+    --sidebar-primary-foreground: var(--primary-foreground);
+    --sidebar-accent: var(--secondary);
+    --sidebar-accent-foreground: var(--secondary-foreground);
+    --sidebar-border: var(--border);
+    --sidebar-ring: var(--ring);
+    --font-inter: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: var(--font-inter);
+    --font-primary: var(--font-sans);
+    --font-display: "Bricolage Grotesque Variable", var(--font-sans);
+    --font-jetbrains-mono: ui-monospace, "SFMono-Regular", menlo, monospace;
+    --radius: 0.875rem;
+    --ne-success: oklch(50% 0.13 150deg);
+    --ne-spice: oklch(55% 0.21 30deg);
+    --ne-spice-inactive: oklch(88% 0.012 75deg);
+    --ne-star: oklch(78% 0.16 80deg);
+    --ne-warning: oklch(94% 0.08 90deg);
+    --ne-warning-foreground: oklch(38% 0.09 70deg);
+
+    /* FoodCover: the plate is real, the food is a ghost. Hue comes from the cuisine. */
+    --ne-cover-lightness: 93%;
+    --ne-cover-chroma: 0.05;
+    --ne-cover-highlight: oklch(100% 0 0deg / 35%);
+    --ne-plate: oklch(100% 0 0deg);
+    --ne-plate-ring: oklch(80% 0.02 70deg);
+    --ne-ghost-opacity: 0.7;
+}
+
+.dark {
+    --background: oklch(17% 0.012 50deg);
+    --foreground: oklch(96% 0.008 80deg);
+    --card: oklch(21% 0.014 50deg);
+    --card-foreground: oklch(96% 0.008 80deg);
+    --popover: oklch(21% 0.014 50deg);
+    --popover-foreground: oklch(96% 0.008 80deg);
+    --primary: oklch(72% 0.17 38deg);
+    --primary-foreground: oklch(20% 0.03 40deg);
+    --secondary: oklch(27% 0.02 55deg);
+    --secondary-foreground: oklch(94% 0.01 80deg);
+    --muted: oklch(26% 0.015 55deg);
+    --muted-foreground: oklch(72% 0.02 70deg);
+    --accent: oklch(32% 0.06 160deg);
+    --accent-foreground: oklch(92% 0.06 160deg);
+    --border: oklch(100% 0 0deg / 12%);
+    --input: oklch(100% 0 0deg / 16%);
+    --ring: oklch(72% 0.17 38deg);
+    --ne-success: oklch(74% 0.15 150deg);
+    --ne-spice: oklch(70% 0.18 32deg);
+    --ne-spice-inactive: oklch(35% 0.015 55deg);
+    --ne-star: oklch(80% 0.15 80deg);
+    --ne-warning: oklch(35% 0.06 70deg);
+    --ne-warning-foreground: oklch(92% 0.08 90deg);
+    --ne-cover-lightness: 30%;
+    --ne-cover-chroma: 0.05;
+    --ne-cover-highlight: oklch(100% 0 0deg / 5%);
+    --ne-plate: oklch(24% 0.014 50deg);
+    --ne-plate-ring: oklch(40% 0.02 60deg);
+    --ne-ghost-opacity: 0.75;
+}

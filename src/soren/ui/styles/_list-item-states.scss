@@ -1,0 +1,43 @@
+@use "focus" as *;
+@use "disabled" as *;
+@use "animations" as *;
+
+@mixin item-states {
+    cursor: default;
+    user-select: none;
+    outline: none;
+    transition: all var(--transition-duration);
+
+    @include focus-ring;
+    @include reduced-motion;
+
+    &[data-hovered],
+    &[data-focused] {
+        color: var(--accent-foreground);
+        background-color: var(--accent);
+    }
+
+    &[data-selected] {
+        color: var(--primary-foreground);
+        background-color: var(--primary);
+
+        &[data-hovered],
+        &[data-focused] {
+            color: var(--primary-foreground);
+            background-color: var(--primary);
+            opacity: 0.9;
+        }
+
+        /* High Contrast Mode: forced-colors ignores --primary, so selection would be
+           invisible. Map to the system Highlight pair. */
+        @media (forced-colors: active) {
+            color: HighlightText;
+            forced-color-adjust: none;
+            background-color: Highlight;
+        }
+    }
+
+    &[data-disabled] {
+        @include disabled-state;
+    }
+}

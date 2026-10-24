@@ -1,0 +1,114 @@
+@use "focus" as *;
+
+@mixin calendar-base {
+    width: fit-content;
+    max-width: 100%;
+    user-select: none;
+}
+
+@mixin calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: var(--spacing-2);
+}
+
+@mixin calendar-heading {
+    margin: 0;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+}
+
+@mixin calendar-grid {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+@mixin calendar-grid-header {
+    margin-bottom: var(--spacing-2);
+}
+
+@mixin calendar-header-cell {
+    width: var(--spacing-8);
+    padding-bottom: var(--spacing-2);
+    font-size: var(--font-size-xs);
+    font-weight: 400;
+    color: var(--muted-foreground);
+    text-align: center;
+}
+
+@mixin calendar-cell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--spacing-8);
+    height: var(--spacing-8);
+    padding: 0;
+    font-size: var(--font-size-xs);
+    text-align: center;
+    cursor: default;
+    outline: none;
+    border-radius: var(--radius-xs);
+
+    @include focus-ring;
+
+    &:hover:not(&.selected, &.disabled) {
+        color: var(--foreground);
+        background-color: var(--muted);
+    }
+
+    &.selected {
+        color: var(--primary-foreground);
+        background-color: var(--primary);
+    }
+
+    &.outside {
+        color: var(--muted-foreground);
+        opacity: 0.5;
+    }
+
+    &.disabled {
+        color: var(--muted-foreground);
+        text-decoration: line-through;
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    &.unavailable {
+        color: var(--muted-foreground);
+        text-decoration: line-through;
+        cursor: not-allowed;
+    }
+}
+
+@mixin calendar-range-cell {
+    &.rangeMiddle {
+        color: var(--accent-foreground);
+        background-color: var(--accent);
+        border-radius: 0;
+    }
+
+    &.rangeStart {
+        color: var(--primary-foreground);
+        background-color: var(--primary);
+        border-radius: var(--radius-xs) 0 0 var(--radius-xs);
+
+        &.rangeEnd {
+            border-radius: var(--radius-xs);
+        }
+    }
+
+    &.rangeEnd {
+        color: var(--primary-foreground);
+        background-color: var(--primary);
+        border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+    }
+}
+
+@mixin calendar-error {
+    margin-top: var(--spacing-2);
+    font-size: var(--font-size-xs);
+    color: var(--destructive);
+}

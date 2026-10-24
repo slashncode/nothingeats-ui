@@ -1,0 +1,120 @@
+@use "focus" as *;
+@use "disabled" as *;
+@use "animations" as *;
+
+@mixin button-base {
+    display: inline-flex;
+    gap: var(--spacing-2);
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    letter-spacing: 0.05rem;
+    white-space: nowrap;
+    border: var(--border-width-1) solid transparent;
+    border-radius: var(--radius-sm);
+    transition-timing-function: var(--transition-timing);
+    transition-duration: var(--transition-duration);
+    transition-property: all;
+
+    & svg {
+        flex-shrink: 0;
+        pointer-events: none;
+    }
+
+    @include focus-ring;
+    @include reduced-motion;
+    @include forced-colors-safe;
+
+    &[data-hovered] {
+        cursor: pointer;
+    }
+
+    &[data-disabled] {
+        @include disabled-state;
+    }
+}
+
+@mixin variant-primary {
+    color: var(--primary-foreground);
+    background-color: var(--primary);
+    box-shadow: var(--shadow-sm);
+
+    &[data-hovered] {
+        background-color: color-mix(in oklab, var(--primary) 90%, transparent);
+    }
+}
+
+@mixin variant-destructive {
+    color: var(--destructive-foreground);
+    background-color: var(--destructive);
+    box-shadow: var(--shadow-sm);
+
+    &[data-hovered] {
+        background-color: color-mix(in oklab, var(--destructive) 90%, transparent);
+    }
+}
+
+@mixin variant-outline {
+    color: var(--foreground);
+    background-color: var(--background);
+    border: var(--border-width-1) solid var(--border);
+    box-shadow: var(--shadow-sm);
+
+    &[data-hovered] {
+        color: var(--accent-foreground);
+        background-color: color-mix(in oklab, var(--accent) 90%, transparent);
+    }
+}
+
+@mixin variant-secondary {
+    color: var(--secondary-foreground);
+    background-color: var(--secondary);
+    box-shadow: var(--shadow-sm);
+
+    &[data-hovered] {
+        background-color: color-mix(in oklab, var(--secondary) 90%, transparent);
+    }
+}
+
+@mixin variant-ghost {
+    color: var(--foreground);
+    background-color: transparent;
+
+    &[data-hovered] {
+        color: var(--accent-foreground);
+        background-color: color-mix(in oklab, var(--accent) 90%, transparent);
+    }
+}
+
+@mixin variant-link {
+    color: var(--primary);
+    text-underline-offset: 4px;
+
+    &[data-hovered] {
+        text-decoration: underline;
+    }
+}
+
+@mixin size-md {
+    height: var(--spacing-10);
+    padding: 0 var(--spacing-4);
+}
+
+@mixin size-sm {
+    height: var(--spacing-8);
+    padding: 0 var(--spacing-3);
+    font-size: var(--font-size-xs);
+    border-radius: var(--radius-xs);
+}
+
+@mixin size-lg {
+    height: var(--spacing-12);
+    padding: 0 var(--spacing-8);
+}
+
+@mixin size-icon {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    padding: 0;
+}

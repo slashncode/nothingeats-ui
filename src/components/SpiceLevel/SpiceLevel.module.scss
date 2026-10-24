@@ -1,0 +1,16 @@
+.spiceLevel {
+    display: inline-flex;
+    gap: 1px;
+    align-items: center;
+}
+
+.flame {
+    width: 1rem;
+    height: 1rem;
+    color: var(--ne-spice-inactive);
+}
+
+.lit {
+    color: var(--ne-spice);
+    fill: currentcolor;
+}

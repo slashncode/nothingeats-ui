@@ -1,0 +1,87 @@
+@use "../styles/focus" as *;
+@use "../styles/disabled" as *;
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    width: fit-content;
+}
+
+.description {
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+}
+
+.error {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--destructive);
+}
+
+.switch {
+    display: inline-flex;
+    gap: var(--spacing-2);
+    align-items: center;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    line-height: normal;
+    color: var(--foreground);
+    cursor: pointer;
+    user-select: none;
+    border-radius: var(--radius-sm);
+    -webkit-tap-highlight-color: transparent;
+
+    @include focus-ring;
+
+    &[data-disabled] {
+        @include disabled-state;
+    }
+
+    &[data-selected] {
+        .track {
+            background-color: var(--primary);
+        }
+
+        .thumb {
+            background-color: var(--primary-foreground);
+            transform: translateX(1rem);
+        }
+    }
+
+    &[data-invalid] {
+        .track {
+            border-color: var(--destructive);
+        }
+    }
+}
+
+.track {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    width: 2.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+    background-color: var(--background);
+    border: 2px solid var(--primary);
+    border-radius: 9999px;
+    opacity: 1;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+}
+
+.thumb {
+    display: block;
+    width: var(--spacing-4);
+    height: var(--spacing-4);
+    background-color: var(--primary);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-sm);
+    transform: translateX(0);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+    transition-property: transform;
+}

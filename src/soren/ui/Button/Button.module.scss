@@ -1,0 +1,15 @@
+@use "../styles/button-variants" as *;
+
+.button { @include button-base; }
+
+.primary { @include variant-primary; }
+.destructive { @include variant-destructive; }
+.outline { @include variant-outline; }
+.secondary { @include variant-secondary; }
+.ghost { @include variant-ghost; }
+.link { @include variant-link; }
+
+.sizeMd { @include size-md; }
+.sizeSm { @include size-sm; }
+.sizeLg { @include size-lg; }
+.sizeIcon { @include size-icon; }

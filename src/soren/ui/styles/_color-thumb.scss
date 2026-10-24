@@ -1,0 +1,26 @@
+@use "focus" as *;
+
+@mixin color-thumb {
+    box-sizing: border-box;
+    width: var(--spacing-4);
+    height: var(--spacing-4);
+    border: var(--border-width-2) solid var(--background);
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 0 1px oklch(0% 0 0deg / 50%);
+
+    @include focus-ring;
+
+    &[data-focus-visible] {
+        width: var(--spacing-6);
+        height: var(--spacing-6);
+    }
+
+    &[data-dragging] {
+        cursor: grabbing;
+    }
+
+    &[data-disabled] {
+        background-color: var(--muted) !important;
+        border-color: var(--border);
+    }
+}

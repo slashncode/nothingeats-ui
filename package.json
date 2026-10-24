@@ -1,0 +1,87 @@
+{
+    "name": "@slashncode/nothingeats-ui",
+    "type": "module",
+    "version": "0.1.0",
+    "packageManager": "pnpm@12.15.0",
+    "description": "NothingEats design system: soren-ui base components, the NothingEats theme and food-domain components.",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/slashncode/nothingeats-ui.git"
+    },
+    "sideEffects": [
+        "**/*.css",
+        "**/*.scss",
+        "./src/styles.ts",
+        "./dist/styles.js"
+    ],
+    "exports": {
+        ".": {
+            "types": "./dist/types/index.d.ts",
+            "import": "./dist/index.js"
+        },
+        "./style.css": "./dist/nothingeats-ui.css"
+    },
+    "files": [
+        "dist"
+    ],
+    "engines": {
+        "node": ">=24"
+    },
+    "scripts": {
+        "dev": "storybook dev -p 6006 --no-open",
+        "build": "vite build && tsc -p tsconfig.build.json",
+        "build-storybook": "storybook build",
+        "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.node.json",
+        "lint": "eslint . && stylelint \"src/**/*.scss\"",
+        "test": "vitest run",
+        "sync:soren-ui": "node scripts/sync-soren-ui.mjs",
+        "check:soren-ui": "node scripts/sync-soren-ui.mjs --check"
+    },
+    "peerDependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+    },
+    "dependencies": {
+        "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+        "@fontsource-variable/inter": "^5.3.0",
+        "@internationalized/date": "^3.12.4",
+        "@internationalized/string": "^3.2.10",
+        "@react-types/shared": "^3.37.0",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "lucide-react": "^1.49.0",
+        "react-aria": "^3.52.1",
+        "react-aria-components": "^1.21.1",
+        "react-stately": "^3.50.0"
+    },
+    "devDependencies": {
+        "@antfu/eslint-config": "^10.0.0",
+        "@eslint-react/eslint-plugin": "^5.28.8",
+        "@storybook/addon-a11y": "^10.6.3",
+        "@storybook/addon-docs": "^10.6.3",
+        "@storybook/addon-themes": "^10.6.3",
+        "@storybook/addon-vitest": "^10.6.3",
+        "@storybook/react-vite": "^10.6.3",
+        "@types/node": "^24.19.2",
+        "@types/react": "19.3.0",
+        "@types/react-dom": "19.3.0",
+        "@vitejs/plugin-react": "^6.1.2",
+        "@vitest/browser-playwright": "^5.0.5",
+        "eslint": "^10.13.0",
+        "eslint-plugin-react-hooks": "^7.1.1",
+        "eslint-plugin-react-refresh": "^0.5.7",
+        "eslint-plugin-storybook": "^10.6.3",
+        "playwright": "^1.64.1",
+        "react": "19.3.1",
+        "react-dom": "19.3.1",
+        "sass-embedded": "^1.106.1",
+        "storybook": "^10.6.3",
+        "stylelint": "^17.16.0",
+        "stylelint-config-recess-order": "^7.9.0",
+        "stylelint-config-standard-scss": "^17.0.0",
+        "typescript": "~6.0.3",
+        "vite": "^8.3.5",
+        "vitest": "^5.0.5"
+    }
+}

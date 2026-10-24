@@ -1,0 +1,213 @@
+@use "../styles/button-variants" as *;
+
+.toggleButton {
+    @include button-base;
+}
+
+.primary {
+    color: var(--primary-foreground);
+    background-color: var(--primary);
+    box-shadow: var(--shadow-sm);
+
+    &[data-hovered] {
+        background-color: color-mix(in oklab, var(--primary) 85%, black);
+    }
+
+    &[data-pressed] {
+        background-color: color-mix(in oklab, var(--primary) 75%, black);
+    }
+
+    &[data-selected] {
+        background-color: color-mix(in oklab, var(--primary) 70%, black);
+
+        &[data-hovered] {
+            background-color: color-mix(in oklab, var(--primary) 60%, black);
+        }
+    }
+}
+
+.destructive {
+    color: var(--destructive-foreground);
+    background-color: var(--destructive);
+    box-shadow: var(--shadow-sm);
+
+    &[data-hovered] {
+        background-color: color-mix(in oklab, var(--destructive) 85%, black);
+    }
+
+    &[data-pressed] {
+        background-color: color-mix(in oklab, var(--destructive) 75%, black);
+    }
+
+    &[data-selected] {
+        background-color: color-mix(in oklab, var(--destructive) 70%, black);
+
+        &[data-hovered] {
+            background-color: color-mix(in oklab, var(--destructive) 60%, black);
+        }
+    }
+}
+
+.outline {
+    color: var(--foreground);
+    background-color: var(--background);
+    border-color: var(--border);
+    box-shadow: var(--shadow-sm);
+
+    &[data-hovered] {
+        color: var(--accent-foreground);
+        background-color: var(--accent);
+    }
+
+    &[data-pressed] {
+        background-color: color-mix(in oklab, var(--accent) 80%, black);
+    }
+
+    &[data-selected] {
+        color: var(--accent-foreground);
+        background-color: var(--accent);
+        border-color: var(--accent);
+
+        &[data-hovered] {
+            background-color: color-mix(in oklab, var(--accent) 85%, black);
+        }
+    }
+}
+
+.secondary {
+    color: var(--secondary-foreground);
+    background-color: var(--secondary);
+    box-shadow: var(--shadow-sm);
+
+    &[data-hovered] {
+        background-color: color-mix(in oklab, var(--secondary) 85%, black);
+    }
+
+    &[data-pressed] {
+        background-color: color-mix(in oklab, var(--secondary) 75%, black);
+    }
+
+    &[data-selected] {
+        color: var(--primary-foreground);
+        background-color: var(--primary);
+
+        &[data-hovered] {
+            background-color: color-mix(in oklab, var(--primary) 85%, black);
+        }
+    }
+}
+
+.ghost {
+    color: var(--foreground);
+    background-color: transparent;
+
+    &[data-hovered] {
+        color: var(--accent-foreground);
+        background-color: var(--accent);
+    }
+
+    &[data-pressed] {
+        background-color: color-mix(in oklab, var(--accent) 80%, black);
+    }
+
+    &[data-selected] {
+        color: var(--accent-foreground);
+        background-color: var(--accent);
+
+        &[data-hovered] {
+            background-color: color-mix(in oklab, var(--accent) 85%, black);
+        }
+    }
+}
+
+.link {
+    color: var(--primary);
+    text-underline-offset: 4px;
+    background-color: transparent;
+
+    &[data-hovered] {
+        color: color-mix(in oklab, var(--primary) 80%, black);
+        text-decoration: underline;
+    }
+
+    &[data-pressed] {
+        color: color-mix(in oklab, var(--primary) 70%, black);
+    }
+
+    &[data-selected] {
+        color: color-mix(in oklab, var(--primary) 70%, black);
+        text-decoration: underline;
+
+        &[data-hovered] {
+            color: color-mix(in oklab, var(--primary) 60%, black);
+        }
+    }
+}
+
+.sizeMd { @include size-md; }
+.sizeSm { @include size-sm; }
+.sizeLg { @include size-lg; }
+.sizeIcon { @include size-icon; }
+
+.toggleGroup {
+    display: flex;
+    width: fit-content;
+
+    &[data-orientation="horizontal"] {
+        flex-direction: row;
+
+        &[data-attached="true"] {
+            > * {
+                &:not(:first-child) {
+                    margin-left: -1px;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+
+                &:not(:last-child) {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+            }
+        }
+
+        &[data-attached="false"] {
+            gap: var(--spacing-2);
+        }
+    }
+
+    &[data-orientation="vertical"] {
+        flex-direction: column;
+
+        &[data-attached="true"] {
+            > * {
+                &:not(:first-child) {
+                    margin-top: -1px;
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+                }
+
+                &:not(:last-child) {
+                    border-bottom-right-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+            }
+        }
+
+        &[data-attached="false"] {
+            gap: var(--spacing-2);
+        }
+    }
+
+    > * {
+        position: relative;
+
+        &:global([data-focus-visible]) {
+            z-index: 10;
+        }
+
+        &:global([data-hovered]) {
+            z-index: 5;
+        }
+    }
+}

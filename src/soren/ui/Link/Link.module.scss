@@ -1,0 +1,43 @@
+@use "../styles/focus" as *;
+@use "../styles/disabled" as *;
+
+.link {
+    position: relative;
+    color: var(--primary);
+    text-decoration-line: none;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    outline: none;
+    border-radius: var(--radius-xs);
+    transition-duration: 200ms;
+    transition-property: color, text-decoration-color;
+
+    @include focus-ring;
+
+    &[data-hovered] {
+        text-decoration-line: underline;
+    }
+
+    &[data-pressed] {
+        opacity: 0.8;
+    }
+
+    &[data-disabled] {
+        @include disabled-state;
+
+        text-decoration: none;
+    }
+}
+
+.secondary {
+    color: var(--muted-foreground);
+
+    &[data-hovered] {
+        color: var(--primary);
+        text-decoration-line: underline;
+    }
+}
+
+.sizeSm { font-size: var(--font-size-xs); }
+.sizeMd { font-size: var(--font-size-sm); }
+.sizeLg { font-size: var(--font-size-md); }

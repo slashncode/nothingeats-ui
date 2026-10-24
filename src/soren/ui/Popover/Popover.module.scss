@@ -1,0 +1,25 @@
+@use "../styles/focus" as *;
+@use "../styles/overlay-arrow" as *;
+
+.popover {
+    box-sizing: border-box;
+    padding: var(--spacing-2);
+    color: var(--popover-foreground);
+    outline: none;
+    background-color: var(--popover);
+    border: var(--border-width-1) solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+
+    @include focus-ring;
+    @include overlay-placement;
+
+    &[data-trigger="MenuTrigger"],
+    &[data-trigger="SubmenuTrigger"] {
+        padding: 0;
+    }
+}
+
+.arrow {
+    @include overlay-arrow;
+}

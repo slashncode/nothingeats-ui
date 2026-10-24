@@ -1,0 +1,17 @@
+@use "../styles/color-thumb" as *;
+@use "../styles/disabled" as *;
+
+.colorWheel {
+    position: relative;
+    display: block;
+    width: 200px;
+    height: 200px;
+
+    &[data-disabled] {
+        @include disabled-state;
+    }
+}
+
+.colorThumb {
+    @include color-thumb;
+}

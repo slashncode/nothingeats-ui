@@ -1,0 +1,70 @@
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoom {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slide-from-top {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes slide-from-bottom {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+@keyframes slide-from-left {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes slide-from-right {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+@keyframes slide-in-from-right {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+@keyframes slide-out-to-right {
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+/*
+ * Accessibility helpers — include inside a selector to inject the guarded rule.
+ * reduced-motion: honors prefers-reduced-motion (WCAG 2.3.3) for transitions/animations.
+ * forced-colors-safe: keeps elements that rely on box-shadow/background visible in
+ * Windows High Contrast / forced-colors mode by guaranteeing a system-colored border.
+ */
+/* stylelint-disable no-invalid-position-declaration -- mixin bodies are always @included inside a selector */
+@mixin reduced-motion {
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+        animation: none;
+    }
+}
+
+@mixin forced-colors-safe {
+    @media (forced-colors: active) {
+        border: var(--border-width-1) solid;
+    }
+}
+/* stylelint-enable no-invalid-position-declaration */

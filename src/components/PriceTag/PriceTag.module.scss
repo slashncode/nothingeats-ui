@@ -1,0 +1,25 @@
+.priceTag {
+    display: inline-flex;
+    gap: var(--spacing-2);
+    align-items: baseline;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.price {
+    font-weight: var(--font-weight-semibold);
+    color: var(--foreground);
+}
+
+.previous {
+    font-size: 0.85em;
+    color: var(--muted-foreground);
+}
+
+.sizeSm { font-size: var(--font-size-sm); }
+.sizeMd { font-size: var(--font-size-md); }
+
+.sizeLg {
+    font-family: var(--font-display);
+    font-size: var(--font-size-xl);
+}

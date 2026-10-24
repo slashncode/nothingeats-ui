@@ -1,0 +1,45 @@
+@use "../styles/calendar" as *;
+
+.calendar { @include calendar-base; }
+.header { @include calendar-header; }
+.heading { @include calendar-heading; }
+
+.pickers {
+    display: flex;
+    flex: 1;
+    gap: var(--spacing-1);
+    align-items: center;
+    justify-content: center;
+}
+
+.pickerSelect {
+    padding: var(--spacing-1) var(--spacing-2);
+    font: inherit;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--foreground);
+    cursor: pointer;
+    background-color: transparent;
+    border: var(--border-width-1) solid transparent;
+    border-radius: var(--radius-sm);
+    transition: background-color 0.2s, border-color 0.2s;
+
+    &:hover {
+        background-color: var(--accent);
+    }
+
+    &:focus-visible {
+        outline: 2px solid var(--ring);
+        outline-offset: 2px;
+    }
+}
+.grid { @include calendar-grid; }
+.gridHeader { @include calendar-grid-header; }
+.headerCell { @include calendar-header-cell; }
+
+.cell {
+    @include calendar-cell;
+    @include calendar-range-cell;
+}
+
+.errorMessage { @include calendar-error; }

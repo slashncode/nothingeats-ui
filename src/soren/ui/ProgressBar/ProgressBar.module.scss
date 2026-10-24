@@ -1,0 +1,72 @@
+.progressBar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    width: 100%;
+    color: var(--foreground);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--font-size-sm);
+}
+
+.value {
+    color: var(--muted-foreground);
+}
+
+.track {
+    position: relative;
+    width: 100%;
+    height: var(--progress-track-height);
+    overflow: hidden;
+    background-color: var(--secondary);
+    border-radius: var(--radius-full);
+    transform: translateZ(0);
+
+    &[data-indeterminate] {
+        .fill {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 30%;
+            animation: indeterminate 1.5s infinite ease-in-out;
+            will-change: left;
+
+            @media (prefers-reduced-motion: reduce) {
+                width: 100%;
+                animation: none;
+            }
+        }
+    }
+}
+
+.fill {
+    width: 0%;
+    height: 100%;
+    background-color: var(--primary);
+    border-radius: inherit;
+    transition: width 0.3s ease-in-out;
+}
+
+@keyframes indeterminate {
+    0% {
+        left: -40%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+@media (forced-colors: active) {
+    .fill {
+        background-color: Highlight;
+    }
+
+    .track {
+        border: 1px solid ButtonText;
+    }
+}

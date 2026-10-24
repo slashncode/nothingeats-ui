@@ -1,0 +1,64 @@
+@use "../styles/focus" as *;
+@use "../styles/disabled" as *;
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    min-width: 150px;
+    height: var(--spacing-10);
+    padding: var(--spacing-2) var(--spacing-3);
+    font-size: var(--font-size-sm);
+    cursor: text;
+    outline: none;
+    background-color: var(--background);
+    border: var(--border-width-1) solid var(--input);
+    border-radius: var(--radius-sm);
+
+    &[data-invalid] {
+        border-color: var(--destructive);
+    }
+
+    &[data-disabled] {
+        @include disabled-state;
+
+        background-color: var(--muted);
+    }
+}
+
+.segment {
+    padding: 0 0.125rem;
+    font-variant-numeric: tabular-nums;
+    caret-color: transparent;
+    outline: none;
+    border-radius: 0.125rem;
+
+    &[data-placeholder] {
+        color: var(--muted-foreground);
+    }
+
+    &[data-type="literal"] {
+        padding: 0;
+        color: var(--muted-foreground);
+    }
+
+    &:focus {
+        color: var(--primary-foreground);
+        background-color: var(--primary);
+    }
+
+    &[data-invalid] {
+        color: var(--destructive);
+
+        &:focus {
+            color: var(--destructive-foreground);
+            background-color: var(--destructive);
+        }
+    }
+}

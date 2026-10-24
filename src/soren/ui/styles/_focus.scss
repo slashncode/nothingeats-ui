@@ -1,0 +1,32 @@
+@mixin focus-ring {
+    &:focus-visible,
+    &:global([data-focus-visible]) {
+        outline: 2px solid var(--ring);
+        outline-offset: 2px;
+
+        /* High Contrast Mode: --ring is a custom color and is ignored by forced-colors,
+           so fall back to the system Highlight color to keep the ring visible. */
+        @media (forced-colors: active) {
+            outline-color: Highlight;
+        }
+    }
+}
+
+@mixin focus-ring-inset {
+    &:focus-visible,
+    &:global([data-focus-visible]) {
+        outline: 2px solid var(--ring);
+        outline-offset: -2px;
+
+        @media (forced-colors: active) {
+            outline-color: Highlight;
+        }
+    }
+}
+
+@mixin focus-ring-none {
+    &:focus-visible,
+    &:global([data-focus-visible]) {
+        outline: none;
+    }
+}

@@ -1,0 +1,31 @@
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-1);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.tag {
+    display: inline-flex;
+    gap: var(--spacing-1);
+    align-items: center;
+    padding: 2px var(--spacing-2);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--font-size-xs-line-height);
+    color: var(--secondary-foreground);
+    background: var(--secondary);
+    border-radius: var(--radius-full);
+}
+
+.vegan {
+    color: var(--accent-foreground);
+    background: var(--accent);
+}
+
+.icon {
+    width: 0.875rem;
+    height: 0.875rem;
+}

@@ -1,0 +1,97 @@
+@use "../styles/focus" as *;
+
+.slider {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    touch-action: none;
+    user-select: none;
+
+    &[data-orientation="horizontal"] {
+        width: 100%;
+
+        .track {
+            width: 100%;
+            height: var(--spacing-2);
+        }
+
+        .fill {
+            top: 0;
+            height: 100%;
+        }
+    }
+
+    &[data-orientation="vertical"] {
+        height: 100%;
+
+        .track {
+            width: var(--spacing-2);
+            height: 100%;
+        }
+
+        .fill {
+            bottom: 0;
+            width: 100%;
+        }
+
+        .thumb {
+            top: auto;
+            left: 50%;
+            transform: translate(-50%, 50%);
+        }
+    }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.track {
+    position: relative;
+    flex-grow: 1;
+    background-color: var(--secondary);
+    border: var(--border-width-1) solid var(--border);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-inner);
+
+    &[data-disabled] {
+        opacity: 0.5;
+    }
+}
+
+.fill {
+    position: absolute;
+    background-color: var(--primary);
+    border-radius: var(--radius-full);
+}
+
+.thumb {
+    top: 50%;
+    display: block;
+    width: var(--spacing-4);
+    height: var(--spacing-4);
+    background-color: var(--background);
+    border: var(--border-width-2) solid var(--primary);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-sm);
+    transform: translate(-50%, -50%);
+
+    @include focus-ring;
+
+    &[data-dragging] {
+        background-color: var(--accent);
+    }
+
+    &[data-disabled] {
+        pointer-events: none;
+    }
+}
+
+.output {
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    line-height: normal;
+}

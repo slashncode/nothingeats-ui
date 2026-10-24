@@ -1,0 +1,162 @@
+@use "../styles/animations" as *;
+@use "../styles/disabled" as *;
+@use "../styles/focus" as *;
+
+.navigationTree {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-px);
+    padding: var(--spacing-1);
+    overflow: auto;
+    color: var(--sidebar-foreground);
+    outline: none;
+    background-color: var(--sidebar);
+    border: var(--border-width-1) solid var(--sidebar-border);
+    border-radius: var(--radius-md);
+
+    @include focus-ring-inset;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-px);
+
+    &:not(:first-child) {
+        margin-top: var(--spacing-4);
+    }
+}
+
+.header {
+    padding: var(--spacing-1) var(--spacing-2);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--muted-foreground);
+}
+
+// One row. React Aria sets --tree-item-level (1-based) per row; rows are flat siblings
+// in the DOM, so nesting is expressed purely as inline-start padding.
+.item {
+    position: relative;
+    display: flex;
+    gap: var(--spacing-1);
+    align-items: center;
+    min-height: var(--spacing-8);
+    padding-inline: calc((var(--tree-item-level, 1) - 1) * var(--spacing-4)) var(--spacing-1);
+    color: var(--sidebar-foreground);
+    cursor: default;
+    user-select: none;
+    outline: none;
+    border-radius: var(--radius-sm);
+    transition: background-color var(--transition-duration) var(--transition-timing);
+    -webkit-tap-highlight-color: transparent;
+
+    // NavigationTreeItem sets data-focus-visible on the row when its link is keyboard
+    // focused, so the ring spans the whole row rather than just the label.
+    @include focus-ring-inset;
+    @include reduced-motion;
+
+    &[data-hovered] {
+        color: var(--sidebar-accent-foreground);
+        background-color: var(--sidebar-accent);
+    }
+
+    &[data-current] {
+        font-weight: var(--font-weight-medium);
+        color: var(--sidebar-accent-foreground);
+        background-color: var(--sidebar-accent);
+    }
+
+    &[data-disabled] {
+        @include disabled-state;
+    }
+
+    // A collapsed ancestor of the current route shows a dot where the current-route pill
+    // would be: "the page you are on is in here", without looking selected.
+    &[data-current-ancestor]:not([data-expanded]) .link::before {
+        display: block;
+        width: var(--spacing-1);
+        height: var(--spacing-1);
+        background-color: var(--muted-foreground);
+    }
+
+    &[data-expanded] .chevronIcon {
+        transform: rotate(90deg);
+    }
+}
+
+.link {
+    position: relative;
+    display: flex;
+    flex: 1;
+    gap: var(--spacing-2);
+    align-items: center;
+    min-width: 0;
+    padding: var(--spacing-1) var(--spacing-2) var(--spacing-1) var(--spacing-3);
+    font-size: var(--font-size-sm);
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    outline: none;
+
+    // Leading-edge indicator. Shown as a pill on the current route, as a dot on a
+    // collapsed current-route ancestor (see .item above).
+    &::before {
+        position: absolute;
+        inset-inline-start: var(--spacing-1);
+        top: 50%;
+        display: none;
+        width: var(--border-width-2);
+        height: 1lh;
+        content: "";
+        background-color: var(--sidebar-primary);
+        border-radius: var(--radius-full);
+        transform: translateY(-50%);
+
+        // Authored backgrounds are dropped in forced-colors mode; keep the indicator.
+        @media (forced-colors: active) {
+            forced-color-adjust: none;
+            background-color: Highlight;
+        }
+    }
+
+    // RAC Link sets data-current from the aria-current="page" NavigationTreeItem hands it.
+    &[data-current]::before {
+        display: block;
+    }
+
+    // A row without an href renders its label as a non-link span that toggles children.
+    &:not([href]) {
+        cursor: default;
+    }
+
+    @media (forced-colors: active) {
+        &[href] {
+            color: LinkText;
+        }
+    }
+}
+
+.chevron {
+    flex-shrink: 0;
+    width: var(--spacing-6);
+    height: var(--spacing-6);
+    padding: 0;
+    color: var(--muted-foreground);
+}
+
+.chevronHidden {
+    visibility: hidden;
+}
+
+.chevronIcon {
+    width: var(--spacing-4);
+    height: var(--spacing-4);
+    transition: transform var(--transition-duration) var(--transition-timing);
+
+    @include reduced-motion;
+
+    &:dir(rtl) {
+        scale: -1 1;
+    }
+}

@@ -1,0 +1,51 @@
+@use "../styles/list-item-states" as *;
+
+.listBox {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-px);
+    min-width: 10rem;
+    padding: var(--spacing-1);
+    overflow: auto;
+    color: var(--popover-foreground);
+    outline: none;
+    background-color: var(--popover);
+    border: var(--border-width-1) solid var(--border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-md);
+}
+
+.listBoxItem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: var(--spacing-1) var(--spacing-2);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.02rem;
+    border-radius: var(--radius-xs);
+
+    @include item-states;
+}
+
+.dropdownListBox {
+    min-width: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.dropdownItem {
+    padding-right: var(--item-check-position, 2rem);
+}
+
+.check {
+    position: absolute;
+    right: var(--item-check-position, 1rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+}

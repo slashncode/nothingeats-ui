@@ -1,0 +1,56 @@
+// Sized with container query units, so plate and food scale with the cover at any width.
+.cover {
+    display: grid;
+    place-items: center;
+    container-type: size;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 30% 20%, var(--ne-cover-highlight), transparent 60%),
+        oklch(var(--ne-cover-lightness) var(--ne-cover-chroma) var(--ne-cover-hue, 80));
+}
+
+.plate {
+    display: grid;
+    place-items: center;
+    height: var(--plate-size, 72cqh);
+    aspect-ratio: 1;
+    background: var(--ne-plate);
+    border: 2px dashed var(--ne-plate-ring);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-md);
+}
+
+.ghost {
+    font-size: var(--ghost-size, 32cqh);
+    line-height: 1;
+    opacity: var(--ne-ghost-opacity);
+    filter: saturate(0.7);
+    animation: hover 4s ease-in-out infinite;
+}
+
+.sizeSm {
+    --plate-size: 78cqh;
+    --ghost-size: 38cqh;
+
+    width: 4rem;
+    aspect-ratio: 1;
+    border-radius: var(--radius-md);
+}
+
+.sizeMd {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.sizeLg {
+    --plate-size: 68cqh;
+
+    width: 100%;
+    aspect-ratio: 21 / 9;
+}
+
+@keyframes hover {
+    0%,
+    100% { transform: translateY(0); }
+    50% { transform: translateY(-3cqh); }
+}

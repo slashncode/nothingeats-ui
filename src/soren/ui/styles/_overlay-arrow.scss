@@ -1,0 +1,50 @@
+@use "animations" as *;
+
+@mixin overlay-placement {
+    transition: transform 200ms ease-out, opacity 200ms ease-out;
+
+    @include reduced-motion;
+
+    &[data-entering],
+    &[data-exiting] {
+        opacity: 0;
+        transform: var(--origin, none);
+    }
+
+    &[data-placement="top"] {
+        --origin: translateY(4px);
+    }
+
+    &[data-placement="bottom"] {
+        --origin: translateY(-4px);
+
+        .arrow svg {
+            rotate: 180deg;
+        }
+    }
+
+    &[data-placement="left"] {
+        --origin: translateX(4px);
+
+        .arrow svg {
+            rotate: -90deg;
+        }
+    }
+
+    &[data-placement="right"] {
+        --origin: translateX(-4px);
+
+        .arrow svg {
+            rotate: 90deg;
+        }
+    }
+}
+
+@mixin overlay-arrow {
+    svg {
+        display: block;
+        fill: var(--popover);
+        stroke: var(--border);
+        stroke-width: 1px;
+    }
+}

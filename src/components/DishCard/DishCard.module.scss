@@ -1,0 +1,75 @@
+.card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--spacing-4);
+    padding: var(--spacing-4);
+    color: var(--card-foreground);
+    background: var(--card);
+    border: var(--border-width-1) solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.unavailable {
+    background: var(--muted);
+
+    .name,
+    .description { color: var(--muted-foreground); }
+}
+
+.body {
+    display: grid;
+    gap: var(--spacing-2);
+    align-content: start;
+    min-width: 0;
+}
+
+.name {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--font-size-lg-line-height);
+}
+
+.description {
+    margin: 0;
+    color: var(--muted-foreground);
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+    align-items: center;
+}
+
+.calories {
+    margin: 0;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--ne-success);
+}
+
+.allergens {
+    margin: 0;
+    font-size: var(--font-size-xs);
+    line-height: var(--font-size-xs-line-height);
+    color: var(--muted-foreground);
+}
+
+.aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.soldOut {
+    padding: 2px var(--spacing-2);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--ne-warning-foreground);
+    background: var(--ne-warning);
+    border-radius: var(--radius-full);
+}

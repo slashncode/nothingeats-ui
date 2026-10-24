@@ -1,0 +1,38 @@
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: fit-content;
+
+    &[data-orientation="horizontal"] {
+        flex-direction: row;
+    }
+
+    &[data-orientation="vertical"] {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    &[aria-orientation="vertical"] {
+        height: auto;
+        margin: 0 var(--spacing-1);
+    }
+
+    [role="group"] {
+        display: flex;
+        gap: inherit;
+        align-items: center;
+    }
+}
+
+.gapSm {
+    gap: var(--spacing-1);
+}
+
+.gapMd {
+    gap: var(--spacing-2);
+}
+
+.gapLg {
+    gap: var(--spacing-3);
+}

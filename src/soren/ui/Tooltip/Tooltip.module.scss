@@ -1,0 +1,21 @@
+@use "../styles/focus" as *;
+@use "../styles/overlay-arrow" as *;
+
+.tooltip {
+    max-width: 15rem;
+    padding: var(--spacing-1) var(--spacing-2);
+    font-size: var(--font-size-xs);
+    color: var(--popover-foreground);
+    outline: none;
+    background-color: var(--popover);
+    border: var(--border-width-1) solid var(--border);
+    border-radius: var(--radius-xs);
+    box-shadow: var(--shadow-md);
+
+    @include focus-ring;
+    @include overlay-placement;
+}
+
+.arrow {
+    @include overlay-arrow;
+}

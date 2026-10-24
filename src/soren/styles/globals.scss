@@ -1,0 +1,242 @@
+@use "sass:meta";
+
+:root {
+  /* Semantic Colors (Light Mode - Default Neutral) */
+  --background: oklch(100% 0 0deg);
+  --foreground: oklch(14.1% 0 0deg);
+  --card: oklch(100% 0 0deg);
+  --card-foreground: oklch(14.1% 0 0deg);
+  --popover: oklch(100% 0 0deg);
+  --popover-foreground: oklch(14.1% 0 0deg);
+  --primary: oklch(20% 0 0deg);
+  --primary-foreground: oklch(99% 0 0deg);
+  --secondary: oklch(97% 0 0deg);
+  --secondary-foreground: oklch(14.1% 0 0deg);
+  --muted: oklch(97% 0 0deg);
+  --muted-foreground: oklch(56.1% 0 0deg);
+  --accent: oklch(97% 0 0deg);
+  --accent-foreground: oklch(20% 0 0deg);
+  --destructive: oklch(58.1% 0.24 28.48deg);
+  --destructive-foreground: oklch(99% 0 0deg);
+  --border: oklch(92% 0 0deg);
+  --input: oklch(92% 0 0deg);
+  --ring: oklch(10% 0 0deg);
+
+  /* Charts */
+  --chart-1: oklch(65% 0.22 36.85deg);
+  --chart-2: oklch(60% 0.11 184.15deg);
+  --chart-3: oklch(40% 0.07 227.18deg);
+  --chart-4: oklch(83% 0.17 81.03deg);
+  --chart-5: oklch(77% 0.17 65.36deg);
+
+  /* Sidebar */
+  --sidebar: oklch(100% 0 0deg);
+  --sidebar-foreground: oklch(14.1% 0 0deg);
+  --sidebar-primary: oklch(20% 0 0deg);
+  --sidebar-primary-foreground: oklch(99% 0 0deg);
+  --sidebar-accent: oklch(97% 0 0deg);
+  --sidebar-accent-foreground: oklch(14.1% 0 0deg);
+  --sidebar-border: oklch(92% 0 0deg);
+  --sidebar-ring: oklch(70.8% 0 0deg);
+
+  /* Typography Defaults */
+  --font-sans: var(--font-inter);
+  --font-serif: ui-serif, georgia, cambria, "Times New Roman", times, serif;
+  --font-mono: var(--font-jetbrains-mono);
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+  --font-size-xs-line-height: calc(1 / 0.75);
+  --font-size-sm-line-height: calc(1.25 / 0.875);
+  --font-size-lg-line-height: calc(1.75 / 1.125);
+  --font-size-xl-line-height: calc(1.75 / 1.25);
+  --font-size-2xl-line-height: calc(2 / 1.5);
+  --font-size-3xl-line-height: calc(2.25 / 1.875);
+  --font-size-4xl-line-height: calc(2.5 / 2.25);
+
+  /* Radius */
+  --radius: 0.625rem;
+  --radius-xs: calc(var(--radius) * 0.25);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-full: 9999px;
+  --border-width-1: 1px;
+  --border-width-2: 2px;
+
+  /* Spacing & Utilities */
+  --tracking-normal: 0.025rem;
+  --tracking-tight: -0.025rem;
+  --spacing: 0.25rem;
+  --spacing-px: 1px;
+  --spacing-0: 0;
+  --spacing-1: calc(var(--spacing) * 1);
+  --spacing-2: calc(var(--spacing) * 2);
+  --spacing-3: calc(var(--spacing) * 3);
+  --spacing-4: calc(var(--spacing) * 4);
+  --spacing-6: calc(var(--spacing) * 6);
+  --spacing-8: calc(var(--spacing) * 8);
+  --spacing-10: calc(var(--spacing) * 10);
+  --spacing-12: calc(var(--spacing) * 12);
+
+  /* Shadows */
+  --shadow-2xs: 0 1px 3px 0px oklch(0% 0 0deg / 5%);
+  --shadow-xs: 0 1px 3px 0px oklch(0% 0 0deg / 5%);
+  --shadow-sm: 0 1px 3px 0px oklch(0% 0 0deg / 10%), 0 1px 2px -1px oklch(0% 0 0deg / 10%);
+  --shadow: 0 1px 3px 0px oklch(0% 0 0deg / 10%), 0 1px 2px -1px oklch(0% 0 0deg / 10%);
+  --shadow-md: 0 1px 3px 0px oklch(0% 0 0deg / 10%), 0 2px 4px -1px oklch(0% 0 0deg / 10%);
+  --shadow-lg: 0 1px 3px 0px oklch(0% 0 0deg / 10%), 0 4px 6px -1px oklch(0% 0 0deg / 10%);
+  --shadow-xl: 0 1px 3px 0px oklch(0% 0 0deg / 10%), 0 8px 10px -1px oklch(0% 0 0deg / 10%);
+  --shadow-2xl: 0 1px 3px 0px oklch(0% 0 0deg / 25%);
+  --shadow-inner: inset 0 1px 2px 0 oklch(0% 0 0deg / 5%);
+
+  /* Motion */
+  --transition-duration: 150ms;
+  --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Component sizing defaults (overridable per consumer) */
+  --icon-size: 2.25rem;
+  --progress-track-height: 0.625rem;
+  --meter-track-height: var(--spacing-2);
+  --modal-max-width: min(500px, 90vw);
+  --modal-side-min-width: 300px;
+  --modal-backdrop: oklch(0% 0 0deg / 40%);
+  --toast-width: 300px;
+  --preview-max-width: 320px;
+  --token-field-min-height: 6.25rem;
+
+  font-family: var(--font-primary);
+  line-height: 1.5;
+  color: var(--foreground);
+  letter-spacing: var(--tracking-normal);
+  background-color: var(--background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+ * Static dark-mode fallback (default theme).
+ * The docs site's ThemeManager injects per-theme vars at runtime and overrides
+ * these; this block exists so the registry's globals.scss is self-sufficient for
+ * consumers who copy it via `shadcn add` without the full themes.ts machinery.
+ */
+.dark {
+  --background: oklch(14.5% 0 0deg);
+  --foreground: oklch(98.5% 0 0deg);
+  --card: oklch(20.5% 0 0deg);
+  --card-foreground: oklch(98.5% 0 0deg);
+  --popover: oklch(20.5% 0 0deg);
+  --popover-foreground: oklch(98.5% 0 0deg);
+  --primary: oklch(92% 0 0deg);
+  --primary-foreground: oklch(20.5% 0 0deg);
+  --secondary: oklch(26.9% 0 0deg);
+  --secondary-foreground: oklch(100% 0 0deg);
+  --muted: oklch(26.9% 0 0deg);
+  --muted-foreground: oklch(70.8% 0 0deg);
+  --accent: oklch(37.1% 0 0deg);
+  --accent-foreground: oklch(98.5% 0 0deg);
+  --destructive: oklch(70% 0.19 22.23deg);
+  --destructive-foreground: oklch(99% 0 0deg);
+  --border: oklch(100% 0 0deg / 10%);
+  --input: oklch(100% 0 0deg / 15%);
+  --ring: oklch(92% 0 0deg);
+  --shadow-inner: inset 0 1px 2px 0 oklch(0% 0 0deg / 20%);
+  --sidebar: oklch(20% 0 0deg);
+  --sidebar-foreground: oklch(98.5% 0 0deg);
+  --sidebar-primary: oklch(49% 0.24 264.4deg);
+  --sidebar-primary-foreground: oklch(100% 0 0deg);
+  --sidebar-accent: oklch(26.9% 0 0deg);
+  --sidebar-accent-foreground: oklch(100% 0 0deg);
+  --sidebar-border: oklch(100% 0 0deg / 10%);
+  --sidebar-ring: oklch(70.8% 0 0deg);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--font-size-4xl-line-height);
+  color: var(--foreground);
+  letter-spacing: var(--tracking-tight);
+}
+
+h2 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-size-3xl-line-height);
+  color: var(--foreground);
+  letter-spacing: var(--tracking-tight);
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-size-2xl-line-height);
+  color: var(--foreground);
+  letter-spacing: var(--tracking-tight);
+}
+
+h4 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-size-xl-line-height);
+  color: var(--foreground);
+  letter-spacing: var(--tracking-tight);
+}
+
+p {
+  font-size: var(--font-size-sm);
+  line-height: var(--font-size-sm-line-height);
+  color: var(--foreground);
+}
+
+blockquote {
+  font-size: var(--font-size-sm);
+  font-style: italic;
+  line-height: var(--font-size-sm-line-height);
+  border-inline-start: 2px solid var(--primary);
+}
+
+ul {
+  display: grid;
+  gap: calc(var(--spacing) * 2);
+  font-size: var(--font-size-sm);
+  line-height: var(--font-size-sm-line-height);
+}
+
+.not-content {
+  font-family: var(--font-primary);
+}
+
+code {
+  padding: 0.2rem 0.3rem;
+  font-family: monospace;
+  font-size: var(--font-size-sm);
+  line-height: var(--font-size-sm-line-height);
+  background-color: var(--muted);
+  border-radius: var(--radius-sm);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+  animation: none;
+}

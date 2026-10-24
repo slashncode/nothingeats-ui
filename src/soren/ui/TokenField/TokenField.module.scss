@@ -1,0 +1,91 @@
+@use "../styles/focus" as *;
+@use "../styles/disabled" as *;
+
+.tokenField {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    width: 100%;
+}
+
+/*
+ * There is no `<input>` here — the editable region is a contenteditable div holding
+ * interleaved text nodes and token spans, so the placeholder and the vertical rhythm
+ * both have to be done in CSS rather than via native attributes.
+ */
+.tokenInput {
+    box-sizing: border-box;
+    min-height: var(--spacing-10);
+    padding: var(--spacing-2) var(--spacing-3);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+    color: var(--foreground);
+    outline: none;
+    background-color: var(--background);
+    border: var(--border-width-1) solid var(--border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-inner);
+    transition:
+        border-color var(--transition-duration) var(--transition-timing),
+        box-shadow var(--transition-duration) var(--transition-timing);
+
+    @include focus-ring;
+
+    &:empty::before {
+        color: var(--muted-foreground);
+        content: attr(data-placeholder);
+    }
+
+    &[data-focused] {
+        border-color: var(--ring);
+    }
+
+    /* Set by React Aria when `allowsNewlines` is on. */
+    &[aria-multiline="true"] {
+        min-height: var(--token-field-min-height);
+    }
+
+    &[data-disabled] {
+        @include disabled-state;
+    }
+}
+
+.token {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--spacing-px) var(--spacing-2);
+    margin: 0 var(--spacing-px);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--secondary-foreground);
+    white-space: nowrap;
+    cursor: default;
+    background-color: var(--secondary);
+    border-radius: var(--radius-xs);
+    -webkit-tap-highlight-color: transparent;
+
+    /* Tokens are atomic: the browser's own text selection must not paint inside them,
+       the [data-selected] state below is the selection affordance instead. */
+    &::selection {
+        background-color: transparent;
+    }
+
+    &[data-selected] {
+        color: var(--primary-foreground);
+        background-color: var(--primary);
+    }
+
+    &[data-disabled] {
+        @include disabled-state;
+    }
+}
+
+.description {
+    font-size: var(--font-size-xs);
+    color: var(--muted-foreground);
+}
+
+.errorMessage {
+    font-size: var(--font-size-xs);
+    color: var(--destructive);
+}

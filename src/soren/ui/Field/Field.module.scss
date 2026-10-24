@@ -1,0 +1,65 @@
+@use "../styles/focus" as *;
+
+.label {
+    margin-bottom: var(--spacing-1);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    line-height: 1;
+    color: var(--foreground);
+    letter-spacing: 0.05rem;
+    cursor: default;
+
+    &[data-disabled] {
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    :global(.group)[data-invalid] & {
+        color: var(--destructive);
+    }
+}
+
+.description {
+    margin-top: var(--spacing-1);
+    font-size: var(--font-size-xs);
+    color: var(--muted-foreground);
+}
+
+.fieldError {
+    margin-top: var(--spacing-1);
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: var(--destructive);
+}
+
+.group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: var(--spacing-10);
+    padding: 0 var(--spacing-3);
+    font-size: var(--font-size-sm);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s;
+
+    &:global([data-focus-within]) {
+        outline: 2px solid var(--ring);
+        outline-offset: 2px;
+    }
+
+    &[data-disabled] {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+}
+
+.default {
+    background-color: var(--background);
+    border: var(--border-width-1) solid var(--border);
+    box-shadow: var(--shadow-inner);
+}
+
+.ghost {
+    border: none;
+    box-shadow: none;
+}

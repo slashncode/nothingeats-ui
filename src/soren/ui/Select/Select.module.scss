@@ -1,0 +1,36 @@
+.select {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    width: 100%;
+
+    &[data-invalid] .trigger {
+        border-color: var(--destructive);
+    }
+}
+
+.trigger {
+    display: flex;
+    gap: var(--spacing-2);
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-width: 0;
+}
+
+.value {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: start;
+    white-space: nowrap;
+
+    &[data-placeholder] {
+        color: var(--muted-foreground);
+    }
+}
+
+.popover {
+    width: var(--trigger-width);
+    overflow-y: auto;
+}

@@ -1,0 +1,29 @@
+.status {
+    display: inline-flex;
+    gap: var(--spacing-2);
+    align-items: center;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--font-size-xs-line-height);
+}
+
+.dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: var(--radius-full);
+}
+
+.open {
+    color: var(--ne-success);
+
+    .dot {
+        background: currentcolor;
+        box-shadow: 0 0 0 3px color-mix(in oklch, currentcolor 25%, transparent);
+    }
+}
+
+.closed {
+    color: var(--muted-foreground);
+
+    .dot { border: 1.5px solid currentcolor; }
+}

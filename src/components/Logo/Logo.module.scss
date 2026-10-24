@@ -1,0 +1,33 @@
+.logo {
+    display: inline-flex;
+    gap: 0.35em;
+    align-items: center;
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-extrabold);
+    line-height: 1;
+    color: var(--foreground);
+    letter-spacing: var(--tracking-tight);
+}
+
+.mark {
+    width: 1.4em;
+    height: 1.4em;
+}
+
+.plate { fill: var(--primary); }
+
+.rim {
+    fill: none;
+    stroke: var(--primary-foreground);
+    stroke-width: 2;
+    stroke-dasharray: 3 2.6;
+}
+
+.nothing {
+    font-weight: var(--font-weight-medium);
+    color: var(--muted-foreground);
+}
+
+.sizeSm { font-size: var(--font-size-md); }
+.sizeMd { font-size: var(--font-size-xl); }
+.sizeLg { font-size: var(--font-size-4xl); }

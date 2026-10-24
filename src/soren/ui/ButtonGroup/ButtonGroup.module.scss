@@ -1,0 +1,70 @@
+.buttonGroup {
+    display: flex;
+    width: fit-content;
+
+    // When attached, the shared edges would stack two box-shadows. Drop the
+    // per-button shadow and give the whole group one shadow instead.
+    &[data-attached="true"] {
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow-sm);
+
+        >* {
+            box-shadow: none;
+        }
+    }
+
+    &[data-orientation="horizontal"] {
+        flex-direction: row;
+
+        &[data-attached="true"] {
+            >* {
+                &:not(:first-child) {
+                    margin-left: -1px;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+
+                &:not(:last-child) {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+            }
+        }
+
+        &[data-attached="false"] {
+            gap: var(--spacing-2);
+        }
+    }
+
+    &[data-orientation="vertical"] {
+        flex-direction: column;
+
+        &[data-attached="true"] {
+            >* {
+                &:not(:first-child) {
+                    margin-top: -1px;
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+                }
+
+                &:not(:last-child) {
+                    border-bottom-right-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+            }
+        }
+
+        &[data-attached="false"] {
+            gap: var(--spacing-2);
+        }
+    }
+
+    >* {
+        position: relative;
+
+        &:focus-visible,
+        &:global([data-focus-visible]) {
+            z-index: 10;
+        }
+    }
+}

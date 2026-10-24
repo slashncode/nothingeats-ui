@@ -1,0 +1,60 @@
+@use "../styles/focus" as *;
+
+.comboBox {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    width: 100%;
+
+    /* RACComboBox does not propagate data-disabled onto the FieldGroup, so dim it here. */
+    &[data-disabled] .fieldGroup {
+        cursor: not-allowed;
+        opacity: 0.5;
+    }
+
+    &[data-invalid] .fieldGroup {
+        border-color: var(--destructive);
+    }
+}
+
+.fieldGroup {
+    display: flex;
+    align-items: center;
+    padding-right: var(--spacing-1);
+}
+
+.input {
+    flex: 1;
+    padding-right: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    @include focus-ring-none;
+}
+
+.affix {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    font-size: var(--font-size-sm);
+    color: var(--muted-foreground);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+}
+
+.trigger {
+    color: var(--muted-foreground);
+}
+
+.popover {
+    width: var(--trigger-width);
+}
+
+.listBox {
+    max-height: inherit;
+    padding: var(--spacing-1);
+    overflow: auto;
+    outline: none;
+}

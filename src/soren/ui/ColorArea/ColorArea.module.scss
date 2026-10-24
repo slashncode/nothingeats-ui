@@ -1,0 +1,26 @@
+@use "../styles/color-thumb" as *;
+@use "../styles/disabled" as *;
+
+.colorArea {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 14rem;
+    aspect-ratio: 1 / 1;
+    background-color: var(--secondary);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-inner);
+
+    &[data-disabled] {
+        @include disabled-state;
+
+        border-color: var(--border);
+    }
+}
+
+.colorThumb {
+    @include color-thumb;
+
+    box-shadow: 0 0 0 1px oklch(0% 0 0deg), inset 0 0 0 1px oklch(0% 0 0deg);
+    transform: translate(-50%, -50%);
+}

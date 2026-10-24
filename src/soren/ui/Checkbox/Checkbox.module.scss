@@ -1,0 +1,82 @@
+@use "../styles/focus" as *;
+@use "../styles/disabled" as *;
+@use "../styles/group" as *;
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    width: fit-content;
+}
+
+.checkbox {
+    display: flex;
+    gap: var(--spacing-2);
+    align-items: center;
+    font-size: var(--font-size-sm);
+    line-height: 1.25rem;
+    color: var(--foreground);
+    cursor: pointer;
+    user-select: none;
+    border-radius: var(--radius-xs);
+
+    @include focus-ring;
+
+    &[data-disabled] {
+        @include disabled-state;
+    }
+
+    &[data-selected],
+    &[data-indeterminate] {
+        .indicator {
+            color: var(--primary-foreground);
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+    }
+
+    &[data-invalid] {
+        .indicator {
+            border-color: var(--destructive);
+        }
+    }
+}
+
+.indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--spacing-4);
+    height: var(--spacing-4);
+    color: transparent;
+    background-color: var(--background);
+    border: var(--border-width-1) solid var(--border);
+    border-radius: var(--radius-xs);
+    box-shadow: var(--shadow-inner);
+    transition: all 0.2s;
+}
+
+.group {
+    @include group-layout;
+}
+
+.label {
+    width: 100%;
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: var(--foreground);
+    letter-spacing: 0.05rem;
+}
+
+.description {
+    width: 100%;
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+}
+
+.error {
+    width: 100%;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--destructive);
+}

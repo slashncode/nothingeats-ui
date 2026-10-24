@@ -1,0 +1,45 @@
+@use "../styles/color-thumb" as *;
+
+.colorSlider {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.label {
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: var(--foreground);
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+}
+
+.output {
+    font-size: var(--font-size-xs);
+    color: var(--muted-foreground);
+}
+
+.track {
+    position: relative;
+    width: 100%;
+    height: var(--spacing-6);
+    border: var(--border-width-1) solid var(--border);
+    border-radius: var(--radius-sm);
+
+    &[data-disabled] {
+        opacity: 0.5;
+    }
+}
+
+.colorThumb {
+    @include color-thumb;
+
+    top: 50%;
+}

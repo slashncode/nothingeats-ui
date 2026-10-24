@@ -1,0 +1,15 @@
+@use "../styles/calendar" as *;
+
+.calendar { @include calendar-base; }
+.header { @include calendar-header; }
+.heading { @include calendar-heading; }
+.grid { @include calendar-grid; }
+.gridHeader { @include calendar-grid-header; }
+.headerCell { @include calendar-header-cell; }
+
+.cell {
+    @include calendar-cell;
+    @include calendar-range-cell;
+}
+
+.errorMessage { @include calendar-error; }

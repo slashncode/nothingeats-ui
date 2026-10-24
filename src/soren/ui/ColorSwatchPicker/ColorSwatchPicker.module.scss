@@ -1,0 +1,20 @@
+.picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-2);
+
+    &[data-layout="stack"] {
+        flex-flow: column nowrap;
+    }
+}
+
+.item {
+    position: relative;
+    outline: none;
+    border-radius: var(--radius-sm);
+
+    &[data-selected],
+    &[data-focus-visible] {
+        box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
+    }
+}

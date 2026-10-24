@@ -1,0 +1,79 @@
+@use "../styles/focus" as *;
+@use "../styles/disabled" as *;
+@use "../styles/group" as *;
+
+.group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+
+.wrapper {
+    @include group-layout;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.description {
+    padding-left: calc(1rem + var(--spacing-2));
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+}
+
+.radio {
+    display: flex;
+    gap: var(--spacing-2);
+    align-items: center;
+    cursor: pointer;
+    border-radius: var(--radius-xs);
+
+    @include focus-ring;
+
+    &[data-disabled] {
+        @include disabled-state;
+    }
+
+    &[data-selected] {
+        .indicator::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    &[data-invalid] {
+        .indicator {
+            border-color: var(--destructive);
+        }
+    }
+}
+
+.indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    border-radius: 9999px;
+    box-shadow: 0 1px 2px 0 oklch(0% 0 0deg / 5%);
+    transition: all 0.2s;
+
+    @include focus-ring;
+
+    &::after {
+        display: block;
+        width: 0.625rem;
+        height: 0.625rem;
+        content: "";
+        background-color: currentcolor;
+        border-radius: 50%;
+        opacity: 0;
+        transform: scale(0);
+        transition: transform 0.2s, opacity 0.2s;
+    }
+}

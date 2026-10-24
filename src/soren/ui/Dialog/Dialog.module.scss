@@ -1,0 +1,43 @@
+@use "../styles/focus" as *;
+
+.dialog {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    padding: var(--spacing-6);
+    outline: none;
+
+    @include focus-ring;
+
+    & [slot="title"] {
+        margin: 0;
+        font-size: var(--font-size-lg);
+        font-weight: 600;
+        line-height: 1.5;
+    }
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.body {
+    flex: 1;
+}
+
+.footer {
+    display: flex;
+    gap: var(--spacing-2);
+    align-items: center;
+    justify-content: flex-end;
+}

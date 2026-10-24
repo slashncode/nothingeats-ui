@@ -1,0 +1,116 @@
+@use "../styles/focus" as *;
+@use "../styles/animations" as *;
+
+.toastRegion {
+    position: fixed;
+    z-index: 100;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--spacing-2);
+    outline: none;
+    border-radius: var(--radius-lg);
+
+    &[data-position="top-left"] {
+        top: var(--spacing-4);
+        left: var(--spacing-4);
+        flex-direction: column;
+    }
+
+    &[data-position="top-center"] {
+        top: var(--spacing-4);
+        left: 50%;
+        flex-direction: column;
+        transform: translateX(-50%);
+    }
+
+    &[data-position="top-right"] {
+        top: var(--spacing-4);
+        right: var(--spacing-4);
+        flex-direction: column;
+    }
+
+    &[data-position="bottom-left"] {
+        bottom: var(--spacing-4);
+        left: var(--spacing-4);
+    }
+
+    &[data-position="bottom-center"] {
+        bottom: var(--spacing-4);
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &[data-position="bottom-right"] {
+        right: var(--spacing-4);
+        bottom: var(--spacing-4);
+    }
+
+    &:global(::view-transition-new(.toast):only-child) {
+        animation: slide-in-from-right 400ms;
+    }
+
+    &:global(::view-transition-old(.toast):only-child) {
+        animation: slide-out-to-right 400ms;
+        animation-fill-mode: forwards;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &:global(::view-transition-new(.toast):only-child),
+        &:global(::view-transition-old(.toast):only-child) {
+            animation: none !important;
+        }
+    }
+}
+
+.toast {
+    display: flex;
+    gap: var(--spacing-4);
+    align-items: center;
+    width: var(--toast-width);
+    padding: var(--spacing-3) var(--spacing-4);
+    color: var(--popover-foreground);
+    outline: none;
+    background: var(--popover);
+    border: var(--border-width-1) solid var(--border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-lg);
+    view-transition-class: toast;
+
+    @include focus-ring;
+
+    &[data-variant="success"] {
+        border-color: oklch(65% 0.18 150deg);
+    }
+
+    &[data-variant="warning"] {
+        border-color: oklch(75% 0.18 90deg);
+    }
+
+    &[data-variant="error"] {
+        color: var(--destructive-foreground);
+        background: var(--destructive);
+        border-color: var(--destructive);
+    }
+}
+
+.toastContent {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.title {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    letter-spacing: 0.025rem;
+}
+
+.description {
+    font-size: var(--font-size-xs);
+    color: var(--muted-foreground);
+}
+
+.closeButton {
+    flex: 0 0 auto;
+}

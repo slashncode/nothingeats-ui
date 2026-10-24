@@ -1,0 +1,83 @@
+@use "../styles/disabled" as *;
+
+.field {
+    display: flex;
+    flex-direction: column;
+
+    &[data-invalid] .group {
+        border-color: var(--destructive);
+    }
+}
+
+.group {
+    position: relative;
+    width: fit-content;
+}
+
+.input {
+    flex: 1;
+    width: 15ch;
+    min-width: 0;
+    padding: 0 var(--spacing-2);
+    font-size: var(--font-size-sm);
+    color: inherit;
+    outline: none;
+    background-color: transparent;
+    border: none;
+}
+
+.affix {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    padding-inline: var(--spacing-1);
+    font-size: var(--font-size-sm);
+    color: var(--muted-foreground);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+}
+
+.steppers {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--input);
+}
+
+.stepper {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 0 var(--spacing-1);
+    color: var(--muted);
+    cursor: default;
+    border: none;
+    border-radius: 0;
+
+    &:hover {
+        color: var(--foreground);
+        background-color: var(--muted);
+    }
+
+    &[data-pressed] {
+        background-color: var(--accent);
+    }
+
+    &[data-disabled] {
+        @include disabled-state;
+    }
+}
+
+.steppers .stepper:first-child {
+    border-bottom: 1px solid var(--input);
+    border-top-right-radius: calc(var(--radius-sm) - 1px);
+}
+
+.steppers .stepper:last-child {
+    border-bottom-right-radius: calc(var(--radius-sm) - 1px);
+}

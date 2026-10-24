@@ -1,0 +1,38 @@
+.meter {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.value {
+    font-size: var(--font-size-xs);
+    color: var(--muted-foreground);
+}
+
+.track {
+    position: relative;
+    height: var(--meter-track-height);
+    overflow: hidden;
+    background-color: var(--secondary);
+    border: var(--border-width-1) solid var(--border);
+    border-radius: var(--radius-full);
+    box-shadow: var(--shadow-inner);
+}
+
+.fill {
+    height: 100%;
+    background-color: var(--primary);
+    border-radius: inherit;
+    transition: width 0.3s ease, background-color 0.3s ease;
+
+    @media (forced-colors: active) {
+        background-color: Highlight;
+    }
+}

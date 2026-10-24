@@ -1,0 +1,22 @@
+@use "../styles/animations" as *;
+
+/*
+ * Layout preset only — entry/exit motion and placement offsets already come from
+ * Popover's `overlay-placement` mixin. Previews open on hover, so the transition
+ * runs far more often than a click-triggered popover's; shorten it to the shared
+ * motion token rather than the 200ms overlay default.
+ *
+ * Unlike a tooltip, a preview may hold interactive content and grow tall, so it
+ * scrolls internally instead of overflowing the viewport.
+ */
+.previewPopover {
+    max-width: var(--preview-max-width);
+    max-height: min(60vh, 400px);
+    padding: var(--spacing-3);
+    overflow-y: auto;
+    transition:
+        transform var(--transition-duration) var(--transition-timing),
+        opacity var(--transition-duration) var(--transition-timing);
+
+    @include reduced-motion;
+}

@@ -1,0 +1,7 @@
+.colorSwatch {
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 0 0 1px oklch(0% 0 0deg / 10%);
+}

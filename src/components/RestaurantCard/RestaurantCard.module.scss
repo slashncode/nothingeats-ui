@@ -1,0 +1,105 @@
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    color: var(--card-foreground);
+    background: var(--card);
+    border: var(--border-width-1) solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    transition:
+        box-shadow var(--transition-duration) var(--transition-timing),
+        transform var(--transition-duration) var(--transition-timing);
+
+    &:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-2px);
+    }
+
+    &:has(.link[data-focus-visible]) {
+        outline: 2px solid var(--ring);
+        outline-offset: 2px;
+
+        @media (forced-colors: active) {
+            outline-color: Highlight;
+        }
+    }
+}
+
+.closed .cover {
+    filter: grayscale(0.7);
+}
+
+.body {
+    display: grid;
+    gap: var(--spacing-2);
+    padding: var(--spacing-4);
+}
+
+.header {
+    display: flex;
+    gap: var(--spacing-2);
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.name {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    line-height: var(--font-size-lg-line-height);
+}
+
+.link {
+    color: inherit;
+    text-decoration: none;
+    outline: none;
+
+    /* Stretches the link over the whole card. */
+    &::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+    }
+}
+
+.cuisine {
+    margin: 0;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.description {
+    display: -webkit-box;
+    margin: 0;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    color: var(--muted-foreground);
+    -webkit-box-orient: vertical;
+}
+
+.facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-4);
+    padding: 0;
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--foreground);
+    list-style: none;
+
+    li {
+        display: inline-flex;
+        gap: var(--spacing-1);
+        align-items: center;
+    }
+}
+
+.icon {
+    width: 1rem;
+    height: 1rem;
+    color: var(--muted-foreground);
+}
