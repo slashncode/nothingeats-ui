@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { SearchSuggestion } from './SearchBox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { expect, fn, userEvent, waitFor, within } from 'storybook/test';
 
 import { SearchBox } from './SearchBox';
@@ -26,12 +26,17 @@ const all: SearchSuggestion[] = [
     },
 ];
 
-// The app fetches suggestions from the search API; here a prefix match over three fixtures.
+// The app fetches suggestions from the search API; here a prefix match over three fixtures that
+// answers a moment later, like the API.
 function Controlled(props: { onSubmit: (text: string) => void; onSuggestion: (suggestion: SearchSuggestion) => void }) {
     const [value, setValue] = useState('');
-    const suggestions = value.length < 2
-        ? []
-        : all.filter(it => it.text.toLowerCase().split(/[\s-]/).some(word => word.startsWith(value.toLowerCase())));
+    const [suggestions, setSuggestions] = useState<SearchSuggestion[]>([]);
+    useEffect(() => {
+        const timer = setTimeout(() => setSuggestions(value.length < 2
+            ? []
+            : all.filter(it => it.text.toLowerCase().split(/[\s-]/).some(word => word.startsWith(value.toLowerCase())))), 50);
+        return () => clearTimeout(timer);
+    }, [value]);
     return <SearchBox value={value} onChange={setValue} suggestions={suggestions} placeholder="Pizza, Pommes, Pho …" {...props} />;
 }
 

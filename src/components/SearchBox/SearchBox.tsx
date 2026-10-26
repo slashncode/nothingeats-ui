@@ -79,6 +79,9 @@ function SearchBox({ ref, value, onChange, suggestions, onSubmit, onSuggestion, 
                 selectedKey={null}
                 onSelectionChange={select}
                 allowsCustomValue
+                // Suggestions arrive after typing; React Aria only opens on input when items exist
+                // at that moment. Opening on an empty list (hidden by CSS) lets them appear later.
+                allowsEmptyCollection
                 menuTrigger="input"
                 className={styles.comboBox}
             >

@@ -33,6 +33,8 @@
 
 .popover {
     width: var(--trigger-width);
+
+    &:has(.list[data-empty]) { display: none; }
 }
 
 .list {
