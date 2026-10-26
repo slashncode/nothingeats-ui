@@ -82,6 +82,7 @@ function DeliveryMap({ label, pickup, dropOff, courier, approachRoute, deliveryR
     const markersRef = useRef<Partial<Record<'pickup' | 'dropOff' | 'courier', Marker>>>({});
     const fittedRef = useRef(false);
     const [loaded, setLoaded] = useState(false);
+    const [failed, setFailed] = useState(false);
     const pickRef = useRef(onPick);
     pickRef.current = onPick;
     // Where the map starts; later pickups (none in practice) do not move it.
@@ -90,15 +91,23 @@ function DeliveryMap({ label, pickup, dropOff, courier, approachRoute, deliveryR
     useEffect(() => {
         if (!containerRef.current)
             return;
-        const instance = new MapLibreMap({
-            container: containerRef.current,
-            style: mapStyle,
-            center: startRef.current
-                ? lngLat(startRef.current)
-                : HAMBURG,
-            zoom: 13,
-            attributionControl: { compact: true },
-        });
+        let instance: MapLibreMap;
+        try {
+            instance = new MapLibreMap({
+                container: containerRef.current,
+                style: mapStyle,
+                center: startRef.current
+                    ? lngLat(startRef.current)
+                    : HAMBURG,
+                zoom: 13,
+                attributionControl: { compact: true },
+            });
+        }
+        catch {
+            // No WebGL2 (old browser, locked-down device): the page works without the map.
+            setFailed(true);
+            return;
+        }
         instance.on('click', (event) => {
             pickRef.current?.({ latitude: event.lngLat.lat, longitude: event.lngLat.lng });
         });
@@ -198,6 +207,9 @@ function DeliveryMap({ label, pickup, dropOff, courier, approachRoute, deliveryR
             });
         }
     }, [approachRoute, deliveryRoute, loaded]);
+
+    if (failed)
+        return <p role="note" className={clsx(styles.unavailable, className)}>{strings.format('map.unavailable')}</p>;
 
     return (
         <div
