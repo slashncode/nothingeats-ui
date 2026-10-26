@@ -1,0 +1,48 @@
+.timeline {
+    display: grid;
+    gap: var(--spacing-3);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.step {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--spacing-3);
+    align-items: center;
+    color: var(--muted-foreground);
+}
+
+.dot {
+    display: grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--primary-foreground);
+    background: var(--muted);
+    border-radius: var(--radius-full);
+}
+
+.label { font-weight: var(--font-weight-medium); }
+
+.time {
+    font-size: var(--font-size-sm);
+    font-variant-numeric: tabular-nums;
+}
+
+.done {
+    color: var(--foreground);
+
+    .dot { background: var(--ne-success); }
+}
+
+.current {
+    font-weight: var(--font-weight-semibold);
+    color: var(--foreground);
+
+    .dot {
+        background: var(--primary);
+        box-shadow: 0 0 0 4px color-mix(in oklch, var(--primary) 25%, transparent);
+    }
+}

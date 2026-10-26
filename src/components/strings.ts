@@ -72,6 +72,16 @@ const de: Record<string, Message> = {
     'search.label': 'Gerichte und Restaurants suchen',
     'search.dish': 'Gericht',
     'search.restaurant': 'Restaurant',
+    'map.pickup': 'Restaurant',
+    'map.dropOff': 'Lieferadresse',
+    'map.courier': 'Kurier',
+    'order.PLACED': 'Bestellt',
+    'order.ACCEPTED': 'Kurier gefunden',
+    'order.COOKING': 'In der Küche',
+    'order.PICKED_UP': 'Abgeholt',
+    'order.EN_ROUTE': 'Unterwegs',
+    'order.DELIVERED': 'Nichts ist da',
+    'order.steps': 'Bestellstatus',
 };
 
 const en: typeof de = {
@@ -136,6 +146,16 @@ const en: typeof de = {
     'search.label': 'Search dishes and restaurants',
     'search.dish': 'Dish',
     'search.restaurant': 'Restaurant',
+    'map.pickup': 'Restaurant',
+    'map.dropOff': 'Drop-off',
+    'map.courier': 'Courier',
+    'order.PLACED': 'Ordered',
+    'order.ACCEPTED': 'Courier found',
+    'order.COOKING': 'In the kitchen',
+    'order.PICKED_UP': 'Picked up',
+    'order.EN_ROUTE': 'On the way',
+    'order.DELIVERED': 'Nothing has arrived',
+    'order.steps': 'Order status',
 };
 
 const strings = { 'de-DE': de, 'en-US': en } as unknown as LocalizedStrings<string, string>;

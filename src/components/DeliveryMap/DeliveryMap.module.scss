@@ -1,0 +1,25 @@
+.map {
+    width: 100%;
+    min-height: 18rem;
+    overflow: hidden;
+    border: var(--border-width-1) solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.picker :global(.maplibregl-canvas) { cursor: crosshair; }
+
+.marker {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    font-size: 1.25rem;
+    background: var(--card);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-full);
+    box-shadow: 0 2px 6px rgb(0 0 0 / 25%);
+}
+
+.courier { border-color: var(--ne-success); }
+
+.dropOff { border-color: var(--foreground); }
