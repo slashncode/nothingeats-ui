@@ -56,6 +56,22 @@ const de: Record<string, Message> = {
     'cuisine.indian': 'Indisch',
     'cuisine.italian': 'Italienisch',
     'cuisine.japanese': 'Japanisch',
+    'mood.cheesy': 'Käsig',
+    'mood.classic': 'Klassiker',
+    'mood.comfort': 'Seelenfutter',
+    'mood.creamy': 'Cremig',
+    'mood.crispy': 'Knusprig',
+    'mood.fresh': 'Frisch',
+    'mood.hearty': 'Herzhaft',
+    'mood.light': 'Leicht',
+    'mood.salty': 'Salzig',
+    'mood.sharable': 'Zum Teilen',
+    'mood.spicy': 'Scharf',
+    'mood.sweet': 'Süß',
+    'mood.umami': 'Umami',
+    'search.label': 'Gerichte und Restaurants suchen',
+    'search.dish': 'Gericht',
+    'search.restaurant': 'Restaurant',
 };
 
 const en: typeof de = {
@@ -104,6 +120,22 @@ const en: typeof de = {
     'cuisine.indian': 'Indian',
     'cuisine.italian': 'Italian',
     'cuisine.japanese': 'Japanese',
+    'mood.cheesy': 'Cheesy',
+    'mood.classic': 'Classic',
+    'mood.comfort': 'Comfort food',
+    'mood.creamy': 'Creamy',
+    'mood.crispy': 'Crispy',
+    'mood.fresh': 'Fresh',
+    'mood.hearty': 'Hearty',
+    'mood.light': 'Light',
+    'mood.salty': 'Salty',
+    'mood.sharable': 'To share',
+    'mood.spicy': 'Spicy',
+    'mood.sweet': 'Sweet',
+    'mood.umami': 'Umami',
+    'search.label': 'Search dishes and restaurants',
+    'search.dish': 'Dish',
+    'search.restaurant': 'Restaurant',
 };
 
 const strings = { 'de-DE': de, 'en-US': en } as unknown as LocalizedStrings<string, string>;
@@ -122,12 +154,14 @@ export function useStrings() {
     };
 }
 
-/** Labels of catalog values (cuisines, diet tags, allergens) in the current locale, for apps. */
+/** Labels of catalog values (cuisines, diet tags, allergens, moods, spice levels) in the current locale, for apps. */
 export function useCatalogLabels() {
     const strings = useStrings();
     return {
         cuisine: (slug: string) => strings.label('cuisine', slug),
         dietary: (tag: string) => strings.label('dietary', tag),
         allergen: (allergen: string) => strings.label('allergen', allergen),
+        mood: (mood: string) => strings.label('mood', mood),
+        spice: (level: number) => strings.label('spice', String(level)),
     };
 }

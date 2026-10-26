@@ -79,3 +79,12 @@ export const MenuDark: Story = {
     ...Menu,
     globals: { theme: 'dark' },
 };
+
+export const WithRestaurant: Story = {
+    args: {
+        restaurant: { name: 'Phantom Pizza', href: '/restaurants/phantom-pizza' },
+    },
+    play: async ({ canvasElement }) => {
+        await expect(within(canvasElement).getByRole('link', { name: 'Phantom Pizza' })).toHaveAttribute('href', '/restaurants/phantom-pizza');
+    },
+};

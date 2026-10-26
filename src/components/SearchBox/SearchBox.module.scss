@@ -1,0 +1,56 @@
+.form {
+    width: 100%;
+}
+
+.comboBox {
+    width: 100%;
+}
+
+.field {
+    display: flex;
+    gap: var(--spacing-2);
+    align-items: center;
+    padding-inline: var(--spacing-3);
+}
+
+.icon {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    color: var(--muted-foreground);
+}
+
+.input {
+    flex: 1;
+    min-width: 0;
+    padding-inline: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    &::-webkit-search-cancel-button { appearance: none; }
+}
+
+.popover {
+    width: var(--trigger-width);
+}
+
+.list {
+    max-height: inherit;
+    padding: var(--spacing-1);
+    overflow: auto;
+    outline: none;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--spacing-2);
+    align-items: center;
+}
+
+.kindIcon {
+    width: 16px;
+    height: 16px;
+    color: var(--muted-foreground);
+}

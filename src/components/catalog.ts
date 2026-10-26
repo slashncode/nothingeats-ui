@@ -39,6 +39,24 @@ export const DIETARY_TAGS = [
 ] as const;
 export type DietaryTag = (typeof DIETARY_TAGS)[number];
 
+/** Moods the catalog tags dishes with; search filters and facets use the same keys. */
+export const MOODS = [
+    'cheesy',
+    'classic',
+    'comfort',
+    'creamy',
+    'crispy',
+    'fresh',
+    'hearty',
+    'light',
+    'salty',
+    'sharable',
+    'spicy',
+    'sweet',
+    'umami',
+] as const;
+export type Mood = (typeof MOODS)[number];
+
 /** The 14 allergens that EU law requires restaurants to declare. */
 export const ALLERGENS = [
     'gluten',

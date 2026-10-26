@@ -6,6 +6,7 @@ import { Plus } from 'lucide-react';
 import { useNumberFormatter } from 'react-aria';
 
 import { Button } from '../../soren/ui/Button/Button';
+import { Link } from '../../soren/ui/Link/Link';
 import { DietaryTags } from '../DietaryTags/DietaryTags';
 import { PriceTag } from '../PriceTag/PriceTag';
 import { SpiceLevel } from '../SpiceLevel/SpiceLevel';
@@ -17,11 +18,13 @@ export interface DishCardProps {
     dish: DishSummary;
     /** Adds the dish to the cart; without it the add button is disabled. */
     onAdd?: (dish: DishSummary) => void;
+    /** Where the dish comes from, for lists that mix restaurants (search results). */
+    restaurant?: { name: string; href: string };
     headingLevel?: 3 | 4 | 5;
     className?: string;
 }
 
-function DishCard({ ref, dish, onAdd, headingLevel = 3, className }: DishCardProps) {
+function DishCard({ ref, dish, onAdd, restaurant, headingLevel = 3, className }: DishCardProps) {
     const strings = useStrings();
     const number = useNumberFormatter();
     const Heading = `h${headingLevel}` as const;
@@ -32,6 +35,7 @@ function DishCard({ ref, dish, onAdd, headingLevel = 3, className }: DishCardPro
             className={clsx(styles.card, !dish.available && styles.unavailable, className)}
         >
             <div className={styles.body}>
+                {restaurant && <Link href={restaurant.href} variant="secondary" className={styles.restaurant}>{restaurant.name}</Link>}
                 <Heading className={styles.name}>{dish.name}</Heading>
                 <p className={styles.description}>{dish.description}</p>
                 {(dish.dietary.length > 0 || dish.spiceLevel > 0) && (
