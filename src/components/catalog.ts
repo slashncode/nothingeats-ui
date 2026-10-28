@@ -28,6 +28,14 @@ export interface DishSummary {
     calories: number;
     moods: string[];
     available: boolean;
+    /** A running flash deal: the dish costs [priceCents] until [endsAt] (ISO). */
+    deal?: DealSummary | null;
+}
+
+export interface DealSummary {
+    priceCents: number;
+    percentOff: number;
+    endsAt: string;
 }
 
 export const DIETARY_TAGS = [

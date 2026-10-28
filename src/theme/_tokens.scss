@@ -9,7 +9,7 @@
     --card-foreground: oklch(21% 0.02 45deg);
     --popover: oklch(100% 0 0deg);
     --popover-foreground: oklch(21% 0.02 45deg);
-    --primary: oklch(56% 0.2 32deg);
+    --primary: oklch(53.5% 0.2 32deg);
     --primary-foreground: oklch(99% 0.005 85deg);
     --secondary: oklch(95% 0.025 75deg);
     --secondary-foreground: oklch(28% 0.04 50deg);
@@ -19,7 +19,7 @@
     --accent-foreground: oklch(32% 0.07 160deg);
     --border: oklch(90% 0.012 75deg);
     --input: oklch(88% 0.014 75deg);
-    --ring: oklch(56% 0.2 32deg);
+    --ring: oklch(53.5% 0.2 32deg);
     --sidebar: var(--card);
     --sidebar-foreground: var(--foreground);
     --sidebar-primary: var(--primary);
@@ -40,6 +40,14 @@
     --ne-star: oklch(78% 0.16 80deg);
     --ne-warning: oklch(94% 0.08 90deg);
     --ne-warning-foreground: oklch(38% 0.09 70deg);
+
+    /* Rewards: medal tiers, the streak flame, the deal badge. */
+    --ne-bronze: oklch(62% 0.11 55deg);
+    --ne-silver: oklch(72% 0.01 250deg);
+    --ne-gold: oklch(80% 0.15 85deg);
+    --ne-flame: oklch(66% 0.2 45deg);
+    --ne-deal: oklch(50% 0.2 25deg);
+    --ne-deal-foreground: oklch(99% 0.005 85deg);
 
     /* FoodCover: the plate is real, the food is a ghost. Hue comes from the cuisine. */
     --ne-cover-lightness: 93%;
@@ -74,6 +82,12 @@
     --ne-star: oklch(80% 0.15 80deg);
     --ne-warning: oklch(35% 0.06 70deg);
     --ne-warning-foreground: oklch(92% 0.08 90deg);
+    --ne-bronze: oklch(68% 0.1 55deg);
+    --ne-silver: oklch(78% 0.01 250deg);
+    --ne-gold: oklch(82% 0.14 85deg);
+    --ne-flame: oklch(72% 0.18 45deg);
+    --ne-deal: oklch(70% 0.17 30deg);
+    --ne-deal-foreground: oklch(20% 0.03 40deg);
     --ne-cover-lightness: 30%;
     --ne-cover-chroma: 0.05;
     --ne-cover-highlight: oklch(100% 0 0deg / 5%);

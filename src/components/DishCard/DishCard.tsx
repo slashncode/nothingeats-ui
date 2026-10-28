@@ -7,6 +7,7 @@ import { useNumberFormatter } from 'react-aria';
 
 import { Button } from '../../soren/ui/Button/Button';
 import { Link } from '../../soren/ui/Link/Link';
+import { DealBadge } from '../DealBadge/DealBadge';
 import { DietaryTags } from '../DietaryTags/DietaryTags';
 import { PriceTag } from '../PriceTag/PriceTag';
 import { SpiceLevel } from '../SpiceLevel/SpiceLevel';
@@ -56,7 +57,14 @@ function DishCard({ ref, dish, onAdd, restaurant, headingLevel = 3, className }:
                 )}
             </div>
             <div className={styles.aside}>
-                <PriceTag cents={dish.priceCents} size="lg" />
+                {dish.deal && <DealBadge percentOff={dish.deal.percentOff} endsAt={dish.deal.endsAt} />}
+                <PriceTag
+                    cents={dish.deal
+                        ? Math.min(dish.deal.priceCents, dish.priceCents)
+                        : dish.priceCents}
+                    previousCents={dish.deal ? dish.priceCents : undefined}
+                    size="lg"
+                />
                 {dish.available
                     ? (
                             <Button

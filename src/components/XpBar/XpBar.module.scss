@@ -1,0 +1,33 @@
+.xpBar {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--spacing-4);
+    align-items: center;
+}
+
+.level {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    font-family: var(--font-display);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--primary-foreground);
+    background: var(--primary);
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 0 4px color-mix(in oklch, var(--primary) 20%, transparent);
+}
+
+.bar { width: 100%; }
+
+.track { height: 0.75rem; }
+
+.fill {
+    background: linear-gradient(90deg, var(--primary), var(--ne-gold));
+    transition: width 600ms ease-out;
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
+}

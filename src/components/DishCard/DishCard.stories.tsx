@@ -88,3 +88,22 @@ export const WithRestaurant: Story = {
         await expect(within(canvasElement).getByRole('link', { name: 'Phantom Pizza' })).toHaveAttribute('href', '/restaurants/phantom-pizza');
     },
 };
+
+export const OnDeal: Story = {
+    args: {
+        dish: {
+            ...margherita,
+            deal: {
+                priceCents: 760,
+                percentOff: 30,
+                endsAt: new Date(Date.now() + 20 * 60_000).toISOString(),
+            },
+        },
+    },
+    play: async ({ canvasElement }) => {
+        const canvas = within(canvasElement);
+        await expect(canvas.getByText('7,60 €')).toBeInTheDocument();
+        await expect(canvas.getByText('−30 %')).toBeInTheDocument();
+        await expect(canvas.getByText('Vorher', { exact: false })).toBeInTheDocument();
+    },
+};

@@ -1,6 +1,10 @@
 import './styles';
 
+export * from './components/BadgeMedal/BadgeMedal';
 export * from './components/catalog';
+export * from './components/CouponCard/CouponCard';
+export * from './components/DealBadge/DealBadge';
+export { clock as countdownClock, useCountdown } from './components/DealBadge/useCountdown';
 export * from './components/DeliveryMap/DeliveryMap';
 export * from './components/DietaryTags/DietaryTags';
 export * from './components/DishCard/DishCard';
@@ -13,5 +17,9 @@ export * from './components/Rating/Rating';
 export * from './components/RestaurantCard/RestaurantCard';
 export * from './components/SearchBox/SearchBox';
 export * from './components/SpiceLevel/SpiceLevel';
+export * from './components/SpinWheel/SpinWheel';
+export * from './components/StampCard/StampCard';
+export * from './components/StreakFlame/StreakFlame';
 export { useCatalogLabels } from './components/strings';
+export * from './components/XpBar/XpBar';
 export * from './soren-ui';

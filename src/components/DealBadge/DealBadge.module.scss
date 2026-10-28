@@ -1,0 +1,32 @@
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--spacing-1) var(--spacing-2);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--ne-deal-foreground);
+    white-space: nowrap;
+    background: var(--ne-deal);
+    border-radius: var(--radius-full);
+}
+
+.visible {
+    display: inline-flex;
+    gap: var(--spacing-1);
+    align-items: center;
+}
+
+.icon {
+    width: 0.9em;
+    height: 0.9em;
+}
+
+.time {
+    font-weight: var(--font-weight-medium);
+    font-variant-numeric: tabular-nums;
+}
+
+.over {
+    color: var(--muted-foreground);
+    background: var(--muted);
+}

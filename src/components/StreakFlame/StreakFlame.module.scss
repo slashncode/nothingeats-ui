@@ -1,0 +1,29 @@
+.streak {
+    display: flex;
+    gap: var(--spacing-3);
+    align-items: center;
+}
+
+.flame {
+    flex: none;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.days {
+    margin: 0;
+    font-weight: var(--font-weight-semibold);
+}
+
+.hint {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--muted-foreground);
+}
+
+.lit .flame {
+    color: var(--ne-flame);
+    fill: color-mix(in oklch, var(--ne-flame) 35%, transparent);
+}
+
+.out .flame { color: var(--muted-foreground); }

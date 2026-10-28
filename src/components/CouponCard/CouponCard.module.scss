@@ -1,0 +1,51 @@
+.coupon {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--spacing-3);
+    align-items: center;
+    padding: var(--spacing-3);
+    background: var(--card);
+    border: 2px dashed color-mix(in oklch, var(--primary) 45%, var(--border));
+    border-radius: var(--radius);
+}
+
+.icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    color: var(--primary);
+}
+
+.body { min-width: 0; }
+
+.title {
+    margin: 0;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+}
+
+.meta {
+    margin: var(--spacing-1) 0 0;
+    font-size: var(--font-size-sm);
+    color: var(--muted-foreground);
+}
+
+.side {
+    display: flex;
+    gap: var(--spacing-1);
+    align-items: center;
+}
+
+.code {
+    padding: var(--spacing-1) var(--spacing-2);
+    font-family: var(--font-jetbrains-mono);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.04em;
+    background: var(--muted);
+    border-radius: var(--radius-sm);
+}
+
+@media (width < 30rem) {
+    .coupon { grid-template-columns: auto 1fr; }
+
+    .side { grid-column: 1 / -1; }
+}
