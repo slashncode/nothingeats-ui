@@ -54,6 +54,14 @@ function wedge(index: number, count: number): string {
     return `M 0 0 L ${point(from)} A 100 100 0 0 1 ${point(to)} Z`;
 }
 
+/** Along the radius; on the lower half turned around, so no label stands on its head. */
+function labelTransform(angle: number): string {
+    const turn = angle > 90 && angle < 270
+        ? -90
+        : 90;
+    return `rotate(${angle}) translate(0 -62) rotate(${turn})`;
+}
+
 /**
  * The wheel of fortune, decorative: the result is decided on the server and passed in. The app
  * announces it in words; for assistive technology the wheel is one labelled image.
@@ -101,7 +109,7 @@ function SpinWheel({ prizes = WHEEL_PRIZES, result, spinId = 0, onSpinEnd, class
                         <g key={prize}>
                             <path d={wedge(index, count)} fill={COLORS[index % COLORS.length]} stroke="var(--card)" strokeWidth="1.5" />
                             <text
-                                transform={`rotate(${(index + 0.5) * step}) translate(0 -62) rotate(90)`}
+                                transform={labelTransform((index + 0.5) * step)}
                                 fill={INK[index % INK.length]}
                                 className={styles.label}
                                 textAnchor="middle"
