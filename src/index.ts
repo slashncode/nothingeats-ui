@@ -2,6 +2,7 @@ import './styles';
 
 export * from './components/BadgeMedal/BadgeMedal';
 export * from './components/catalog';
+export * from './components/ChatBubble/ChatBubble';
 export * from './components/CouponCard/CouponCard';
 export * from './components/DealBadge/DealBadge';
 export { clock as countdownClock, useCountdown } from './components/DealBadge/useCountdown';
