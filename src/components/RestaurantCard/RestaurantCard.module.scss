@@ -27,6 +27,12 @@
     }
 }
 
+// A photo takes the FoodCover's place and size.
+img.cover {
+    height: auto;
+    aspect-ratio: 16 / 9;
+}
+
 .closed .cover {
     filter: grayscale(0.7);
 }

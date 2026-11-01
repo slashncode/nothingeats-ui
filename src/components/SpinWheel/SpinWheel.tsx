@@ -18,8 +18,10 @@ export const WHEEL_PRIZES = [
 ] as const;
 
 export interface SpinWheelProps {
-    /** Prize keys clockwise from the top; labels come from the strings (`wheel.<KEY>`). */
+    /** Prize keys clockwise from the top (loyalty's `GET /wheel`). */
     prizes?: readonly string[];
+    /** Labels by prize key, from the backoffice; keys without one fall back to the strings (`wheel.<KEY>`). */
+    labels?: Readonly<Record<string, string>>;
     /**
      * The prize the wheel stops at: the server decided it, the wheel only shows it. Each new value
      * spins a few turns and lands there; null keeps it still.
@@ -66,7 +68,7 @@ function labelTransform(angle: number): string {
  * The wheel of fortune, decorative: the result is decided on the server and passed in. The app
  * announces it in words; for assistive technology the wheel is one labelled image.
  */
-function SpinWheel({ prizes = WHEEL_PRIZES, result, spinId = 0, onSpinEnd, className }: SpinWheelProps) {
+function SpinWheel({ prizes = WHEEL_PRIZES, labels, result, spinId = 0, onSpinEnd, className }: SpinWheelProps) {
     const strings = useStrings();
     const [rotation, setRotation] = useState(0);
     const ended = useRef(onSpinEnd);
@@ -115,7 +117,7 @@ function SpinWheel({ prizes = WHEEL_PRIZES, result, spinId = 0, onSpinEnd, class
                                 textAnchor="middle"
                                 dominantBaseline="central"
                             >
-                                {strings.label('wheel', prize)}
+                                {labels?.[prize] ?? strings.label('wheel', prize)}
                             </text>
                         </g>
                     ))}

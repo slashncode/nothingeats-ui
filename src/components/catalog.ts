@@ -1,6 +1,16 @@
 // View models of the catalog API (`/api/catalog/v1`), already in the caller's language.
 // Tags arrive as lowercase strings; unknown values are shown as they come.
 
+/** An uploaded photo (backoffice, Garage): public paths, alt text in the caller's language, focal point in percent. */
+export interface ImageSummary {
+    url: string;
+    cardUrl: string;
+    wideUrl: string;
+    alt: string;
+    focalX?: number | null;
+    focalY?: number | null;
+}
+
 export interface RestaurantSummary {
     slug: string;
     name: string;
@@ -14,6 +24,8 @@ export interface RestaurantSummary {
     /** `HH:mm`, Berlin time */
     opensAt: string;
     closesAt: string;
+    /** Without one the card draws its FoodCover. */
+    image?: ImageSummary | null;
 }
 
 export interface DishSummary {
@@ -30,6 +42,7 @@ export interface DishSummary {
     available: boolean;
     /** A running flash deal: the dish costs [priceCents] until [endsAt] (ISO). */
     deal?: DealSummary | null;
+    image?: ImageSummary | null;
 }
 
 export interface DealSummary {
@@ -113,4 +126,16 @@ export function timeOfDay(value: string): Date | undefined {
     const date = new Date(2026, 0, 1);
     date.setHours(Number(match[1]), Number(match[2]), 0, 0);
     return date;
+}
+
+/** An article of the magazine (backoffice `/api/backoffice/v1/articles`), in the caller's language. */
+export interface ArticleSummary {
+    slug: string;
+    title: string;
+    excerpt: string;
+    cover?: ImageSummary | null;
+    category?: { slug: string; name: string } | null;
+    tags: { slug: string; name: string }[];
+    /** ISO instant. */
+    publishedAt?: string | null;
 }

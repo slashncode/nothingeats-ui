@@ -9,6 +9,7 @@ import { Button } from '../../soren/ui/Button/Button';
 import { Link } from '../../soren/ui/Link/Link';
 import { DealBadge } from '../DealBadge/DealBadge';
 import { DietaryTags } from '../DietaryTags/DietaryTags';
+import { Photo } from '../Photo/Photo';
 import { PriceTag } from '../PriceTag/PriceTag';
 import { SpiceLevel } from '../SpiceLevel/SpiceLevel';
 import { useStrings } from '../strings';
@@ -57,6 +58,7 @@ function DishCard({ ref, dish, onAdd, restaurant, headingLevel = 3, className }:
                 )}
             </div>
             <div className={styles.aside}>
+                {dish.image && <Photo image={dish.image} className={styles.photo} />}
                 {dish.deal && <DealBadge percentOff={dish.deal.percentOff} endsAt={dish.deal.endsAt} />}
                 <PriceTag
                     cents={dish.deal

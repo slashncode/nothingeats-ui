@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
-import { bigNothing, chanaMasala, margherita, vindaloo } from '../../stories/fixtures';
+import { bigNothing, chanaMasala, margherita, photo, vindaloo } from '../../stories/fixtures';
+import { UiStringsProvider } from '../strings';
 import { DishCard } from './DishCard';
 
 const meta = {
@@ -26,6 +27,35 @@ export const Default: Story = {
         await expect(card.getByText('Allergene: Gluten, Milch')).toBeInTheDocument();
         await userEvent.click(card.getByRole('button', { name: 'Margherita of Nothing in den Warenkorb' }));
         await expect(args.onAdd).toHaveBeenCalledWith(margherita);
+    },
+};
+
+export const WithPhoto: Story = {
+    args: {
+        dish: { ...margherita, image: photo },
+    },
+    play: async ({ canvasElement }) => {
+        await expect(within(canvasElement).getByRole('img', { name: 'Eine Pizza, die es nicht gibt' })).toBeInTheDocument();
+    },
+};
+
+/** Editors' wording from the backoffice wins over the defaults; placeholders still fill in. */
+export const EditedTexts: Story = {
+    args: { dish: bigNothing },
+    decorators: [
+        Story => (
+            <UiStringsProvider overrides={{
+                de: { 'dish.soldOut': 'Heute leider nichts', 'dish.calories': '{calories} kcal gespart' },
+            }}
+            >
+                <Story />
+            </UiStringsProvider>
+        ),
+    ],
+    play: async ({ canvasElement }) => {
+        const card = within(canvasElement);
+        await expect(card.getByText('Heute leider nichts')).toBeInTheDocument();
+        await expect(card.getByText('1.100 kcal gespart')).toBeInTheDocument();
     },
 };
 

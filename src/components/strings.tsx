@@ -1,32 +1,35 @@
 'use client';
 
-import type { LocalizedStrings } from '@internationalized/string';
-import { useLocalizedStringFormatter } from 'react-aria';
+import IntlMessageFormat from 'intl-messageformat';
+import { createContext, use, useMemo } from 'react';
+import { useLocale } from 'react-aria';
 
-// Strings of the domain components in German and English, the React Aria way: the locale comes
-// from the nearest I18nProvider, so the components need no i18n library of the app.
-// Values are formatted by the caller (numbers, money, times) and passed in as variables.
+// Strings of the domain components in German and English as ICU messages. The locale comes from
+// the nearest I18nProvider, so the components need no i18n library of the app. Values are formatted
+// by the caller (money, times) and passed in as variables; counts go in as numbers for plurals.
+// Editors can override any message (backoffice, journal record 042): the app passes the overrides
+// to UiStringsProvider, and they win over the defaults below.
 
 type Variables = Record<string, string | number>;
-type Message = string | ((variables: Variables) => string);
+export type UiLanguage = 'de' | 'en';
 
-const de: Record<string, Message> = {
+const de: Record<string, string> = {
     'price.previous': 'Vorher',
-    'rating.label': v => `Bewertung ${v.value} von 5`,
+    'rating.label': 'Bewertung {value} von 5',
     'spice.0': 'Mild',
     'spice.1': 'Leicht scharf',
     'spice.2': 'Scharf',
     'spice.3': 'Sehr scharf',
     'status.open': 'Jetzt geöffnet',
     'status.closed': 'Geschlossen',
-    'status.opensAt': v => `Geschlossen · öffnet um ${v.time}`,
-    'delivery.minutes': v => `${v.minutes} Min.`,
+    'status.opensAt': 'Geschlossen · öffnet um {time}',
+    'delivery.minutes': '{minutes} Min.',
     'delivery.free': 'Gratis-Lieferung',
-    'delivery.fee': v => `Lieferung ${v.fee}`,
-    'order.minimum': v => `Mindestbestellwert ${v.amount}`,
-    'dish.add': v => `${v.name} in den Warenkorb`,
+    'delivery.fee': 'Lieferung {fee}',
+    'order.minimum': 'Mindestbestellwert {amount}',
+    'dish.add': '{name} in den Warenkorb',
     'dish.soldOut': 'Ausverkauft',
-    'dish.calories': v => `${v.calories} kcal, die du nicht isst`,
+    'dish.calories': '{calories} kcal, die du nicht isst',
     'dish.allergens': 'Allergene',
     'dietary.label': 'Ernährung',
     'dietary.vegan': 'Vegan',
@@ -83,15 +86,13 @@ const de: Record<string, Message> = {
     'order.EN_ROUTE': 'Unterwegs',
     'order.DELIVERED': 'Nichts ist da',
     'order.steps': 'Bestellstatus',
-    'deal.badge': v => `−${v.percent} %`,
-    'deal.ends': v => `noch ${v.time}`,
-    'deal.label': v => `Blitzdeal: ${v.percent} % günstiger, endet in ${v.time}`,
+    'deal.badge': '−{percent} %',
+    'deal.ends': 'noch {time}',
+    'deal.label': 'Blitzdeal: {percent} % günstiger, endet in {time}',
     'deal.over': 'Deal vorbei',
-    'xp.level': v => `Level ${v.level}`,
-    'xp.value': v => `${v.into} von ${v.needed} XP bis Level ${v.next}`,
-    'streak.days': v => (v.days === 1
-        ? '1 Tag in Folge'
-        : `${v.days} Tage in Folge`),
+    'xp.level': 'Level {level}',
+    'xp.value': '{into} von {needed} XP bis Level {next}',
+    'streak.days': '{days, plural, one {# Tag in Folge} other {# Tage in Folge}}',
     'streak.none': 'Noch keine Serie',
     'streak.today': 'Heute schon bestellt',
     'streak.keep': 'Bestell heute, sonst ist die Serie weg',
@@ -99,24 +100,22 @@ const de: Record<string, Message> = {
     'chat.coach': 'Craving Coach',
     'chat.typing': 'Der Craving Coach denkt nach',
     'badge.locked': 'Noch nicht verdient',
-    'badge.earned': v => `Verdient am ${v.date}`,
+    'badge.earned': 'Verdient am {date}',
     'badge.tier.BRONZE': 'Bronze',
     'badge.tier.SILVER': 'Silber',
     'badge.tier.GOLD': 'Gold',
-    'stamps.label': v => `Stempelkarte ${v.restaurant}: ${v.stamps} von ${v.perCard} Stempeln`,
+    'stamps.label': 'Stempelkarte {restaurant}: {stamps} von {perCard} Stempeln',
     'stamps.reward': 'Volle Karte: ein Gericht gratis',
-    'stamps.completed': v => (v.count === 1
-        ? '1 Karte voll'
-        : `${v.count} Karten voll`),
-    'coupon.PERCENT': v => `${v.value} % Rabatt`,
-    'coupon.AMOUNT': v => `${v.amount} Rabatt`,
+    'stamps.completed': '{count, plural, one {# Karte voll} other {# Karten voll}}',
+    'coupon.PERCENT': '{value} % Rabatt',
+    'coupon.AMOUNT': '{amount} Rabatt',
     'coupon.FREE_DELIVERY': 'Lieferung gratis',
     'coupon.FREE_DISH': 'Ein Gericht gratis',
-    'coupon.max': v => `bis ${v.amount}`,
-    'coupon.minimum': v => `ab ${v.amount}`,
-    'coupon.only': v => `nur bei ${v.restaurant}`,
-    'coupon.expires': v => `gültig bis ${v.date}`,
-    'coupon.copy': v => `Code ${v.code} kopieren`,
+    'coupon.max': 'bis {amount}',
+    'coupon.minimum': 'ab {amount}',
+    'coupon.only': 'nur bei {restaurant}',
+    'coupon.expires': 'gültig bis {date}',
+    'coupon.copy': 'Code {code} kopieren',
     'coupon.copied': 'Kopiert',
     'wheel.label': 'Glücksrad',
     'wheel.PERCENT_10': '10 %',
@@ -126,26 +125,27 @@ const de: Record<string, Message> = {
     'wheel.FREE_DISH': 'Gericht',
     'wheel.BONUS_XP': '+100 XP',
     'wheel.GOLDEN_FORK': 'Gabel',
-    'wheel.result': v => `Gewonnen: ${v.prize}`,
+    'wheel.result': 'Gewonnen: {prize}',
+    'article.published': 'Erschienen am {date}',
 };
 
 const en: typeof de = {
     'price.previous': 'Previously',
-    'rating.label': v => `Rated ${v.value} out of 5`,
+    'rating.label': 'Rated {value} out of 5',
     'spice.0': 'Mild',
     'spice.1': 'Mildly spicy',
     'spice.2': 'Spicy',
     'spice.3': 'Very spicy',
     'status.open': 'Open now',
     'status.closed': 'Closed',
-    'status.opensAt': v => `Closed · opens at ${v.time}`,
-    'delivery.minutes': v => `${v.minutes} min`,
+    'status.opensAt': 'Closed · opens at {time}',
+    'delivery.minutes': '{minutes} min',
     'delivery.free': 'Free delivery',
-    'delivery.fee': v => `Delivery ${v.fee}`,
-    'order.minimum': v => `Minimum order ${v.amount}`,
-    'dish.add': v => `Add ${v.name} to cart`,
+    'delivery.fee': 'Delivery {fee}',
+    'order.minimum': 'Minimum order {amount}',
+    'dish.add': 'Add {name} to cart',
     'dish.soldOut': 'Sold out',
-    'dish.calories': v => `${v.calories} kcal you won't eat`,
+    'dish.calories': '{calories} kcal you won\'t eat',
     'dish.allergens': 'Allergens',
     'dietary.label': 'Diet',
     'dietary.vegan': 'Vegan',
@@ -202,15 +202,13 @@ const en: typeof de = {
     'order.EN_ROUTE': 'On the way',
     'order.DELIVERED': 'Nothing has arrived',
     'order.steps': 'Order status',
-    'deal.badge': v => `−${v.percent}%`,
-    'deal.ends': v => `${v.time} left`,
-    'deal.label': v => `Flash deal: ${v.percent}% off, ends in ${v.time}`,
+    'deal.badge': '−{percent}%',
+    'deal.ends': '{time} left',
+    'deal.label': 'Flash deal: {percent}% off, ends in {time}',
     'deal.over': 'Deal over',
-    'xp.level': v => `Level ${v.level}`,
-    'xp.value': v => `${v.into} of ${v.needed} XP to level ${v.next}`,
-    'streak.days': v => (v.days === 1
-        ? '1 day in a row'
-        : `${v.days} days in a row`),
+    'xp.level': 'Level {level}',
+    'xp.value': '{into} of {needed} XP to level {next}',
+    'streak.days': '{days, plural, one {# day in a row} other {# days in a row}}',
     'streak.none': 'No streak yet',
     'streak.today': 'Ordered today',
     'streak.keep': 'Order today or the streak is gone',
@@ -218,24 +216,22 @@ const en: typeof de = {
     'chat.coach': 'Craving Coach',
     'chat.typing': 'The Craving Coach is thinking',
     'badge.locked': 'Not earned yet',
-    'badge.earned': v => `Earned on ${v.date}`,
+    'badge.earned': 'Earned on {date}',
     'badge.tier.BRONZE': 'Bronze',
     'badge.tier.SILVER': 'Silver',
     'badge.tier.GOLD': 'Gold',
-    'stamps.label': v => `Stamp card ${v.restaurant}: ${v.stamps} of ${v.perCard} stamps`,
+    'stamps.label': 'Stamp card {restaurant}: {stamps} of {perCard} stamps',
     'stamps.reward': 'Full card: one dish free',
-    'stamps.completed': v => (v.count === 1
-        ? '1 card filled'
-        : `${v.count} cards filled`),
-    'coupon.PERCENT': v => `${v.value}% off`,
-    'coupon.AMOUNT': v => `${v.amount} off`,
+    'stamps.completed': '{count, plural, one {# card filled} other {# cards filled}}',
+    'coupon.PERCENT': '{value}% off',
+    'coupon.AMOUNT': '{amount} off',
     'coupon.FREE_DELIVERY': 'Free delivery',
     'coupon.FREE_DISH': 'One dish free',
-    'coupon.max': v => `up to ${v.amount}`,
-    'coupon.minimum': v => `from ${v.amount}`,
-    'coupon.only': v => `only at ${v.restaurant}`,
-    'coupon.expires': v => `valid until ${v.date}`,
-    'coupon.copy': v => `Copy code ${v.code}`,
+    'coupon.max': 'up to {amount}',
+    'coupon.minimum': 'from {amount}',
+    'coupon.only': 'only at {restaurant}',
+    'coupon.expires': 'valid until {date}',
+    'coupon.copy': 'Copy code {code}',
     'coupon.copied': 'Copied',
     'wheel.label': 'Wheel of fortune',
     'wheel.PERCENT_10': '10%',
@@ -245,23 +241,60 @@ const en: typeof de = {
     'wheel.FREE_DISH': 'Dish',
     'wheel.BONUS_XP': '+100 XP',
     'wheel.GOLDEN_FORK': 'Fork',
-    'wheel.result': v => `You won: ${v.prize}`,
+    'wheel.result': 'You won: {prize}',
+    'article.published': 'Published on {date}',
 };
 
-const strings = { 'de-DE': de, 'en-US': en } as unknown as LocalizedStrings<string, string>;
+/** The default messages, also published by the app so the backoffice knows every key. */
+export const UI_STRINGS: Record<UiLanguage, Record<string, string>> = { de, en };
+
+const OverridesContext = createContext<Partial<Record<UiLanguage, Record<string, string>>>>({});
+
+export interface UiStringsProviderProps {
+    /** Messages editors changed, per language; keys as in [UI_STRINGS]. */
+    overrides: Partial<Record<UiLanguage, Record<string, string>>>;
+    children: React.ReactNode;
+}
+
+export function UiStringsProvider({ overrides, children }: UiStringsProviderProps) {
+    return <OverridesContext value={overrides}>{children}</OverridesContext>;
+}
 
 export function useStrings() {
-    const formatter = useLocalizedStringFormatter(strings, '@slashncode/nothingeats-ui');
-    return {
-        format: (key: string, variables?: Variables) => formatter.format(key, variables),
-        /** A label for a tag-like value, or the value itself when there is no translation. */
-        label: (prefix: string, value: string) => {
-            const key = `${prefix}.${value}`;
-            return key in de
-                ? formatter.format(key)
-                : value.replaceAll('_', ' ');
-        },
-    };
+    const { locale } = useLocale();
+    const language: UiLanguage = locale.toLowerCase().startsWith('en')
+        ? 'en'
+        : 'de';
+    const overrides = use(OverridesContext)[language];
+    return useMemo(() => {
+        const formats = new Map<string, IntlMessageFormat>();
+        const format = (key: string, variables?: Variables): string => {
+            const fallback = UI_STRINGS[language][key] ?? key;
+            const message = overrides?.[key] ?? fallback;
+            try {
+                let compiled = formats.get(key);
+                if (!compiled) {
+                    compiled = new IntlMessageFormat(message, locale);
+                    formats.set(key, compiled);
+                }
+                return String(compiled.format(variables));
+            }
+            catch {
+                // A broken override must not break the shop: back to the default wording.
+                return String(new IntlMessageFormat(fallback, locale).format(variables));
+            }
+        };
+        return {
+            format,
+            /** A label for a tag-like value, or the value itself when there is no translation. */
+            label: (prefix: string, value: string) => {
+                const key = `${prefix}.${value}`;
+                return key in UI_STRINGS[language]
+                    ? format(key)
+                    : value.replaceAll('_', ' ');
+            },
+        };
+    }, [language, locale, overrides]);
 }
 
 /** Labels of catalog values (cuisines, diet tags, allergens, moods, spice levels) in the current locale, for apps. */

@@ -8,6 +8,7 @@ import { Link } from 'react-aria-components';
 
 import { FoodCover } from '../FoodCover/FoodCover';
 import { OpenStatus } from '../OpenStatus/OpenStatus';
+import { Photo } from '../Photo/Photo';
 import { Rating } from '../Rating/Rating';
 import { useStrings } from '../strings';
 import styles from './RestaurantCard.module.scss';
@@ -35,7 +36,9 @@ function RestaurantCard({ ref, restaurant, href, headingLevel = 3, className }: 
             data-ph-capture-attribute-restaurant-slug={restaurant.slug}
             className={clsx(styles.card, !restaurant.openNow && styles.closed, className)}
         >
-            <FoodCover cuisine={restaurant.cuisine} className={styles.cover} />
+            {restaurant.image
+                ? <Photo image={restaurant.image} className={styles.cover} />
+                : <FoodCover cuisine={restaurant.cuisine} className={styles.cover} />}
             <div className={styles.body}>
                 <div className={styles.header}>
                     <Heading className={styles.name}>

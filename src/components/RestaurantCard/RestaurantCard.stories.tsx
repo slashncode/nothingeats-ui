@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
 
-import { airBurger, imaginaryIceCream, phantomPizza, restaurants } from '../../stories/fixtures';
+import { airBurger, imaginaryIceCream, phantomPizza, photo, restaurants } from '../../stories/fixtures';
 import { RestaurantCard } from './RestaurantCard';
 
 const meta = {
@@ -32,6 +32,16 @@ export const Closed: Story = {
     args: { restaurant: imaginaryIceCream, href: '/restaurants/imaginary-ice-cream' },
     play: async ({ canvasElement }) => {
         await expect(within(canvasElement).getByText(/13:00|1:00 PM/)).toBeInTheDocument();
+    },
+};
+
+/** An uploaded photo takes the FoodCover's place; its alt text comes from the backoffice. */
+export const WithPhoto: Story = {
+    args: {
+        restaurant: { ...phantomPizza, image: photo },
+    },
+    play: async ({ canvasElement }) => {
+        await expect(within(canvasElement).getByRole('img', { name: 'Eine Pizza, die es nicht gibt' })).toBeInTheDocument();
     },
 };
 

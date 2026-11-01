@@ -45,6 +45,19 @@ export const Still: Story = {
     },
 };
 
+/** Prizes and labels as the backoffice publishes them (loyalty's `GET /wheel`). */
+export const FromTheBackoffice: Story = {
+    args: {
+        prizes: ['PERCENT_10', 'AMOUNT_5', 'BONUS_XP'],
+        labels: { PERCENT_10: '10 % weg', AMOUNT_5: '5 € weg', BONUS_XP: '+50 XP' },
+    },
+    play: async ({ canvasElement }) => {
+        const canvas = within(canvasElement);
+        await expect(canvas.getByText('10 % weg')).toBeInTheDocument();
+        await expect(canvas.getByText('+50 XP')).toBeInTheDocument();
+    },
+};
+
 /** The server says "free delivery"; the wheel turns there and reports when it stopped. */
 export const Spinning: Story = {
     render: args => <SpinDemo {...args} />,

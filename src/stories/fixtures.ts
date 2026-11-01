@@ -1,4 +1,4 @@
-import type { DishSummary, RestaurantSummary } from '../components/catalog';
+import type { ArticleSummary, DishSummary, ImageSummary, RestaurantSummary } from '../components/catalog';
 
 // Taken from the catalog service's seed (nothingeats-catalog-service, seed/catalog.json).
 
@@ -106,4 +106,28 @@ export const chanaMasala: DishSummary = {
     calories: 610,
     moods: ['spicy', 'comfort', 'hearty'],
     available: true,
+};
+
+/** A photo for stories: a plate on warm paper, drawn inline so stories need no files. */
+const photoSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400"><rect width="640" height="400" fill="#e9c9a1"/><circle cx="320" cy="200" r="150" fill="#fbf6ee" stroke="#c9a27a" stroke-width="8"/><circle cx="320" cy="200" r="90" fill="#d9472b" opacity="0.8"/></svg>`;
+
+export const photo: ImageSummary = {
+    url: `data:image/svg+xml;utf8,${encodeURIComponent(photoSvg)}`,
+    cardUrl: `data:image/svg+xml;utf8,${encodeURIComponent(photoSvg)}`,
+    wideUrl: `data:image/svg+xml;utf8,${encodeURIComponent(photoSvg)}`,
+    alt: 'Eine Pizza, die es nicht gibt',
+    focalX: 50,
+    focalY: 50,
+};
+
+export const article: ArticleSummary = {
+    slug: 'die-pizza-die-nie-kam',
+    title: 'Die Pizza, die nie kam',
+    excerpt: 'Warum die beste Bestellung die ist, auf die man ewig wartet.',
+    cover: photo,
+    category: { slug: 'geschichten', name: 'Geschichten' },
+    tags: [
+        { slug: 'pizza', name: 'Pizza' },
+    ],
+    publishedAt: '2026-10-30T09:00:00Z',
 };

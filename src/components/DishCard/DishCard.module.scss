@@ -81,3 +81,10 @@
     background: var(--ne-warning);
     border-radius: var(--radius-full);
 }
+
+// Only dishes with an uploaded photo show one; the others keep today's text-only card.
+.photo {
+    width: 96px;
+    height: 96px;
+    border-radius: var(--radius-md);
+}

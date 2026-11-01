@@ -1,5 +1,6 @@
 import './styles';
 
+export * from './components/ArticleCard/ArticleCard';
 export * from './components/BadgeMedal/BadgeMedal';
 export * from './components/catalog';
 export * from './components/ChatBubble/ChatBubble';
@@ -13,6 +14,7 @@ export * from './components/FoodCover/FoodCover';
 export * from './components/Logo/Logo';
 export * from './components/OpenStatus/OpenStatus';
 export * from './components/OrderTimeline/OrderTimeline';
+export * from './components/Photo/Photo';
 export * from './components/PriceTag/PriceTag';
 export * from './components/Rating/Rating';
 export * from './components/RestaurantCard/RestaurantCard';
@@ -21,6 +23,7 @@ export * from './components/SpiceLevel/SpiceLevel';
 export * from './components/SpinWheel/SpinWheel';
 export * from './components/StampCard/StampCard';
 export * from './components/StreakFlame/StreakFlame';
-export { useCatalogLabels } from './components/strings';
+export { UI_STRINGS, UiStringsProvider, useCatalogLabels } from './components/strings';
+export type { UiLanguage, UiStringsProviderProps } from './components/strings';
 export * from './components/XpBar/XpBar';
 export * from './soren-ui';
