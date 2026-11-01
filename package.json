@@ -20,6 +20,10 @@
             "types": "./dist/types/index.d.ts",
             "import": "./dist/index.js"
         },
+        "./strings": {
+            "types": "./dist/types/components/strings.d.ts",
+            "import": "./dist/components/strings.js"
+        },
         "./style.css": "./dist/nothingeats-ui.css"
     },
     "files": [
