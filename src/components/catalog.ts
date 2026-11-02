@@ -128,7 +128,7 @@ export function timeOfDay(value: string): Date | undefined {
     return date;
 }
 
-/** An article of the magazine (backoffice `/api/backoffice/v1/articles`), in the caller's language. */
+/** An article of the blog (backoffice `/api/backoffice/v1/articles`), in the caller's language. */
 export interface ArticleSummary {
     slug: string;
     title: string;

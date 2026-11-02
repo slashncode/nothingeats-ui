@@ -20,7 +20,7 @@ export interface ArticleCardProps {
 }
 
 /**
- * An article of the magazine in a list. Like RestaurantCard, the title is the only link and
+ * An article of the blog in a list. Like RestaurantCard, the title is the only link and
  * stretches over the card; without a cover the card draws a plate of nothing.
  */
 function ArticleCard({ ref, article, href, headingLevel = 3, className }: ArticleCardProps) {

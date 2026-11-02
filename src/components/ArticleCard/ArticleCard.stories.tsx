@@ -7,7 +7,7 @@ import { ArticleCard } from './ArticleCard';
 const meta = {
     title: 'Domain/ArticleCard',
     component: ArticleCard,
-    args: { article, href: '/articles/die-pizza-die-nie-kam' },
+    args: { article, href: '/blog/die-pizza-die-nie-kam' },
     parameters: { width: 340 },
     decorators: [
         (Story, { parameters }) => <div style={{ width: parameters.width as number | string }}><Story /></div>,
@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
     play: async ({ canvasElement }) => {
         const card = within(canvasElement);
-        await expect(card.getByRole('link', { name: 'Die Pizza, die nie kam' })).toHaveAttribute('href', '/articles/die-pizza-die-nie-kam');
+        await expect(card.getByRole('link', { name: 'Die Pizza, die nie kam' })).toHaveAttribute('href', '/blog/die-pizza-die-nie-kam');
         await expect(card.getByText('Erschienen am 30. Oktober 2026')).toBeInTheDocument();
         await expect(card.getByText('Geschichten')).toBeInTheDocument();
     },
